@@ -42,26 +42,39 @@ Two engines run behind it:
   what runs on GitHub Pages, and it's also the fallback if the live model is unavailable, so a demo
   never breaks — it's just honest extraction instead of true understanding.
 
-## Swapping in real product photography
+## Product photography
 
-The bottle is currently drawn in SVG, which is what lets the label text wrap around the glass and
-change live. To use real photographs instead, drop transparent PNGs into `images/` and replace the
-`renderBottle()` call in the stage with an `<img>` plus an absolutely-positioned text overlay. The
-label text is generated in one place (`renderBottle`), so this is a contained change.
+`images/` holds one real product photo per fragrance plus `hero-set.jpg` for the header — Bla Bli
+Blu's own photography, used here for the concept demo only. `mountShot()` places these photos in
+the hero, the interactive stage, each fragrance's picker thumbnail, and the wall tiles.
+
+The customer's three words are printed on top of the photo through a small label patch
+(`.shot .label`) positioned over each bottle's real printed-name area — its position is hand-tuned
+per shot via the `lab` property on each `FRAGS`/`WALL` entry (`LAB_CAN` for the two-bottle studio
+shots, `LAB_SOLO` for single-bottle shots), and its colour matches the bottle (cream label / red ink
+for parfum, red label / cream ink for oud).
+
+Dragging the stage tilts the photo in 3D (`rotateY`, via `applyTilt()`); arrow keys nudge it ±3°.
+If a photo ever fails to load, `mountShot()` automatically falls back to the original hand-drawn SVG
+bottle (`renderBottle()`), so the demo never breaks even if `images/` is missing or a filename typo
+sneaks in.
 
 ## Structure
 
 Everything is in `index.html`:
 
-- `FRAGS` — the 15 live fragrances with notes, prices and whether they're in the oud range (oud ships
-  in the red bottle, parfum in cream).
+- `FRAGS` — the 15 live fragrances with notes, prices, product photo (`img`), label position (`lab`)
+  and thumbnail crop (`op`), and whether they're in the oud range (oud ships in the red bottle,
+  parfum in cream).
 - `SIZES` — 30 / 75 / 100 ml with the price multipliers.
 - `RELS` — the relationships, each with an example message about that person.
-- `WALL` — the sample bottles on the "Everyone's got one" wall.
+- `WALL` — the sample bottles on the "Everyone's got one" wall, each with its own photo.
 - `localWords()` — the offline three-words extraction engine.
-- `renderBottle()` — the bottle, including the cylindrical label wrap.
+- `mountShot()` / `renderBottle()` — the bottle: the real photo plus label overlay, with the drawn
+  SVG bottle kept as an automatic fallback.
 
 ## Note
 
 This is a student concept prototype, not an official Bla Bli Blu property. Fragrance names, notes and
-prices reflect the live range; the bottle artwork is an illustration.
+prices reflect the live range; bottle photography is Bla Bli Blu's own product photography, used here
+for the concept demo.
