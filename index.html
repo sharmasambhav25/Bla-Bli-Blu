@@ -391,12 +391,12 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     {k:"Roommate",en:"",ex:"maggi bana du?"}
   ];
   var WALL=[
-    {w:["Pag","Pig","Pug"], line:"oye pagle", rel:"Bhai", oud:false},
-    {w:["Khaa","Khii","Khuu"], line:"kuch khaaya?", rel:"Mumma", oud:false},
-    {w:["Dhee","Dhii","Dhuu"], line:"gaadi dheere chalana", rel:"Papa", oud:true},
-    {w:["Sun","Sin","Sun"], line:"aur sunao beta", rel:"Nani", oud:false},
-    {w:["Rach","Rich","Ruch"], line:"reach karke batana", rel:"Best friend", oud:true},
-    {w:["Mag","Mig","Mug"], line:"maggi bana du?", rel:"Roommate", oud:false}
+    {w:["Pa","Pi","Pu"], line:"oye pagle", rel:"Bhai", oud:false},
+    {w:["Ka","Ki","Ku"], line:"kuch khaaya?", rel:"Mumma", oud:false},
+    {w:["Ga","Gi","Gu"], line:"gaadi dheere chalana", rel:"Papa", oud:true},
+    {w:["Ja","Ji","Ju"], line:"khana kha ke jaana", rel:"Dadi", oud:false},
+    {w:["Ra","Ri","Ru"], line:"padhai kaisi chal rahi", rel:"Nana", oud:true},
+    {w:["Da","Di","Du"], line:"maggi bana du?", rel:"Roommate", oud:false}
   ];
 
   var state={frag:0,size:2,rel:0,gib:null,rot:-0.08};
@@ -404,24 +404,23 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   var SVGNS="http://www.w3.org/2000/svg";
 
   /* ---------- gibberish engine ---------- */
+  // Same rule Bla Bli Blu itself follows: ONE short consonant sound, repeated three times,
+  // vowel shifting A -> I -> U. No coda, no cluster longer than two letters -> always
+  // legible and sayable on the first try, and visibly a sibling of the brand name.
   function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h)}
   function clusters(s){
     var t=s.toLowerCase().replace(/[^a-z ]/g," "),ws=t.split(/\s+/).filter(Boolean),out=[];
     for(var i=0;i<ws.length;i++){
-      var m=ws[i].match(/^[bcdfghjklmnpqrstvwxyz]{1,3}/);
+      var m=ws[i].match(/^[bcdfghjklmnpqrstvwxyz]{1,2}/);
       if(m&&m[0])out.push(m[0]);
-      else{var m2=ws[i].match(/[bcdfghjklmnpqrstvwxyz]{1,2}/); if(m2)out.push(m2[0])}
     }
     return out.length?out:["bl"];
   }
   function cap(w){return w.charAt(0).toUpperCase()+w.slice(1)}
   function localGib(line){
     var cs=clusters(line),h=hash(line||"bla");
-    var a=cs[h%cs.length]; if(a.length>3)a=a.slice(0,3);
-    var b=cs.length>1?cs[(h+1)%cs.length]:a; if(b.length>3)b=b.slice(0,3);
-    var tails=[["a","i","u"],["aa","ii","uu"],["ah","ih","uh"],["a","ee","oo"]][h%4];
-    var coda=["","m","n","","k",""][(h>>3)%6];
-    return [cap(a+tails[0]+coda),cap(b+tails[1]),cap(a+tails[2])];
+    var c=cs[h%cs.length];
+    return [cap(c+"a"),cap(c+"i"),cap(c+"u")];
   }
 
   /* ---------- bottle drawing ---------- */
@@ -663,13 +662,16 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
       if(note){$("err").textContent=note;$("err").hidden=false}
     };
     if(!sampleFn){ setTimeout(function(){done(fb,null,null)},850); return; }
-    var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose name is gibberish meaning "I love you".\n'+
-      'The pattern: ONE consonant cluster repeated three times with the vowel shifting (Bla / Bli / Blu).\n\n'+
+    var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose own name is built from ONE short '+
+      'consonant sound (1-2 letters) repeated three times as the vowel shifts A, then I, then U — Bla, Bli, Blu. Nothing else '+
+      'is added: no extra letters before the sound, no extra letters after the vowel.\n\n'+
       'Someone is gifting a bottle to their '+r.k+(r.en?" ("+r.en+")":"")+'.\nTheir line is: "'+line+'"\n\n'+
-      'Invent THREE nonsense words in that pattern, built from the sounds of their line. Rules: 3-6 letters each; '+
-      'pronounceable by a Hindi or English speaker; NOT a real word in any language; must echo the consonants of their line; Title Case.\n'+
+      'Pick ONE short consonant sound (1-2 letters, maximum) from the sounds in their line, and build exactly three words: '+
+      '<sound>+A, <sound>+I, <sound>+U. Rules: 2-3 letters per word only; must be trivially easy to read and say out loud on '+
+      'the very first try, like Bla/Bli/Blu itself; NOT a real word in any language; Title Case; the SAME sound in all three, '+
+      'only the vowel changes.\n'+
       'Also write one warm sentence (max 22 words) on what these words now mean between these two people.\n\n'+
-      'Reply with only JSON: {"words":["Xxx","Xxx","Xxx"],"meaning":"..."}';
+      'Reply with only JSON: {"words":["Xx","Xx","Xx"],"meaning":"..."}';
     try{
       var d=await sampleFn.json(prompt,{modelTier:"quick",cache:false});
       var w=(d&&Array.isArray(d.words))?d.words.filter(Boolean).slice(0,3):null;
