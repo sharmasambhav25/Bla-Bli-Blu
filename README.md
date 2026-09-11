@@ -6,9 +6,6 @@ Everyone has their own way of saying "I love you". Pick a fragrance, pick a size
 write the one line only the two of you understand — and the studio turns it into three gibberish
 words that get printed on the bottle where BLA BLI BLU normally goes.
 
-![Hero](preview-hero.png)
-![Studio](preview-studio.png)
-
 ## Live demo
 
 Once GitHub Pages is turned on for this repo (see below), the live link goes here so the jury can
@@ -49,12 +46,21 @@ Two engines run behind it:
 - **Local engine** — a deterministic phonetic generator in `index.html`. This is what runs on GitHub
   Pages, and it's also the fallback if the model is unavailable, so a demo never breaks.
 
-## Swapping in real product photography
+## Product photography
 
-The bottle is currently drawn in SVG, which is what lets the label text wrap around the glass and
-change live. To use real photographs instead, drop transparent PNGs into `images/` and replace the
-`renderBottle()` call in the stage with an `<img>` plus an absolutely-positioned text overlay. The
-label text is generated in one place (`renderBottle`), so this is a contained change.
+The site now uses Bla Bli Blu's **real product photography** — the same studio shots that appear on
+their own website (`blabliblulife.com`) — instead of the old drawn bottle:
+
+- `images/` holds one photo per fragrance (plus `hero-set.jpg` for the hero), saved from the brand's
+  product pages and their retailer listings. Photography © Bla Bli Blu; used here for this concept
+  demo only.
+- `mountShot()` in `index.html` places each photo in the hero, the studio stage, the fragrance
+  picker (as a thumbnail) and the wall tiles. The three gibberish words are printed over the
+  photographed bottle on a label patch matched to the bottle's own colour, sitting exactly where the
+  printed fragrance name is (`lab` zone per photo, in percent of the image).
+- Dragging the stage now tilts the photo in 3D instead of spinning the drawn bottle.
+- `renderBottle()` (the SVG bottle with the cylindrical label wrap) is kept as an automatic fallback:
+  if a photo ever fails to load, the drawn bottle appears in its place so a demo never breaks.
 
 ## Structure
 
@@ -66,9 +72,10 @@ Everything is in `index.html`:
 - `RELS` — the relationships, each with a suggested line.
 - `WALL` — the sample bottles on the "Everyone's got one" wall.
 - `localGib()` — the offline gibberish engine.
-- `renderBottle()` — the bottle, including the cylindrical label wrap.
+- `mountShot()` — the real product photo plus the printed label patch.
+- `renderBottle()` — the fallback SVG bottle, including the cylindrical label wrap.
 
 ## Note
 
 This is a student concept prototype, not an official Bla Bli Blu property. Fragrance names, notes and
-prices reflect the live range; the bottle artwork is an illustration.
+prices reflect the live range; the bottle photography is Bla Bli Blu's own product photography.
