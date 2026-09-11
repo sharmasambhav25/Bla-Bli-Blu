@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bla Bli Blu Gibberish Studio</title>
+<meta name="description" content="Everyone has their own way of saying I love you. Turn yours into three words and print it on the bottle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+:root{
+  --red:#C0392F;
+  --red-hot:#CF2028;
+  --red-deep:#8E1F18;
+  --cream:#F1EADD;
+  --cream-2:#E4D7C1;
+  --bottle-cream:#F2ECE1;
+  --bottle-red:#BE3A31;
+  --ink:#141011;
+  --ink-2:#4E4344;
+  --ink-3:#8C7F7E;
+  --paper:#FFFFFF;
+  --line:#E2D9D6;
+  --surface:#FFFFFF;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --red:#D4443A; --red-hot:#FF4F52; --red-deep:#FF8A84;
+    --cream:#1E1718; --cream-2:#2A2021;
+    --bottle-cream:#EDE6DB; --bottle-red:#C7413A;
+    --ink:#F5EEEC; --ink-2:#CBBDBB; --ink-3:#8E807F;
+    --paper:#100B0C; --line:#2E2426; --surface:#181112;
+  }
+}
+:root[data-theme="dark"]{
+  --red:#D4443A; --red-hot:#FF4F52; --red-deep:#FF8A84;
+  --cream:#1E1718; --cream-2:#2A2021;
+  --bottle-cream:#EDE6DB; --bottle-red:#C7413A;
+  --ink:#F5EEEC; --ink-2:#CBBDBB; --ink-3:#8E807F;
+  --paper:#100B0C; --line:#2E2426; --surface:#181112;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Barlow",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.anton{font-family:"Anton","Barlow Condensed",Impact,sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; margin:0; text-wrap:balance}
+.cond{font-family:"Barlow Condensed","Barlow",sans-serif; text-transform:uppercase; letter-spacing:.06em}
+.wrap{max-width:1180px; margin:0 auto; padding-inline:22px}
+
+/* ---------- marquees ---------- */
+.ticker{overflow:hidden; white-space:nowrap; border-bottom:1px solid var(--line); background:var(--paper)}
+.ticker.black{background:#100B0C; border:none}
+.ticker-inner{display:inline-flex; gap:0; animation:slide 38s linear infinite}
+@keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+.ticker span{
+  font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase;
+  letter-spacing:.05em; font-size:13px; color:var(--red-hot); padding:8px 0;
+}
+.ticker.black span{color:#F1EADD}
+.ticker span i{font-style:normal; opacity:.45; padding:0 14px}
+@media (prefers-reduced-motion:reduce){ .ticker-inner{animation:none} }
+
+/* ---------- header ---------- */
+.masthead{background:var(--red); position:sticky; top:0; z-index:50}
+.mast-in{display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:14px; flex-wrap:wrap}
+.logo{color:#fff; text-decoration:none; line-height:1}
+.logo b{font-family:"Anton",sans-serif; font-weight:400; font-size:23px; letter-spacing:.12em; display:block}
+.logo s{display:block; text-decoration:none; font-family:"Barlow Condensed",sans-serif; font-size:10.5px; letter-spacing:.42em; opacity:.9; margin-top:3px; padding-left:3px}
+nav{display:flex; gap:20px; flex-wrap:wrap}
+nav a{
+  color:#fff; text-decoration:none; font-family:"Barlow Condensed",sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:.05em; font-size:15px; opacity:.92;
+}
+nav a:hover{opacity:1; text-decoration:underline; text-underline-offset:4px}
+
+/* ---------- hero ---------- */
+.hero{background:var(--cream); border-bottom:1px solid var(--line)}
+.hero-in{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:40px; align-items:center; padding-block:56px 48px}
+@media (max-width:860px){ .hero-in{grid-template-columns:1fr; padding-block:38px 34px} }
+.kicker{font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.16em; font-size:13px; color:var(--red-hot); margin-bottom:16px}
+h1{font-size:clamp(40px,7vw,78px); line-height:.92; color:var(--ink)}
+h1 em{font-style:normal; color:var(--red-hot)}
+.hero p{font-size:17.5px; color:var(--ink-2); max-width:46ch; margin:20px 0 26px}
+.hero-art{display:flex; justify-content:center}
+.hero-art svg{width:100%; max-width:290px; height:auto}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-block; background:var(--red-hot); color:#fff; border:none; cursor:pointer;
+  font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
+  font-size:16px; padding:15px 30px; text-decoration:none; transition:background .15s, transform .12s;
+}
+.btn:hover:not(:disabled){background:var(--red-deep); transform:translateY(-1px)}
+.btn:disabled{opacity:.38; cursor:not-allowed}
+.btn-line{
+  display:inline-block; background:none; color:var(--ink); border:1.5px solid var(--ink); cursor:pointer;
+  font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
+  font-size:14px; padding:12px 22px; transition:background .15s,color .15s;
+}
+.btn-line:hover{background:var(--ink); color:var(--paper)}
+:where(button,textarea,a,[tabindex]):focus-visible{outline:2.5px solid var(--red-hot); outline-offset:2px}
+
+/* ---------- sections ---------- */
+section{padding-block:60px}
+.sec-head{text-align:center; margin-bottom:38px}
+.sec-head h2{font-size:clamp(28px,4.6vw,44px); line-height:1}
+.sec-head p{color:var(--ink-2); max-width:56ch; margin:14px auto 0}
+
+/* how it works */
+.steps4{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2px; background:var(--line); border:1px solid var(--line)}
+@media (max-width:780px){ .steps4{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:440px){ .steps4{grid-template-columns:1fr} }
+.s4{background:var(--surface); padding:26px 22px}
+.s4 .n{font-family:"Anton",sans-serif; font-size:34px; color:var(--cream-2); line-height:1}
+.s4 h3{font-size:19px; margin:8px 0 6px}
+.s4 p{font-size:14.5px; color:var(--ink-2); margin:0}
+
+/* ---------- studio ---------- */
+.studio{background:var(--cream)}
+.studio-grid{display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:44px; align-items:start}
+@media (max-width:980px){ .studio-grid{grid-template-columns:1fr; gap:26px} }
+.panel{background:var(--surface); border:1px solid var(--line); padding:26px 24px}
+.step{border-top:1px solid var(--line); padding-block:22px}
+.step:first-child{border-top:none; padding-top:0}
+.step-head{display:flex; align-items:center; gap:11px; margin-bottom:15px; flex-wrap:wrap}
+.step-n{
+  font-family:"Anton",sans-serif; font-size:13px; color:#fff; background:var(--red-hot);
+  width:24px; height:24px; display:grid; place-items:center; flex:none;
+}
+.step-head h3{font-size:19px}
+.step-pick{margin-left:auto; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.05em; font-size:13.5px; color:var(--red-hot)}
+
+.frags{display:grid; grid-template-columns:repeat(auto-fill,minmax(196px,1fr)); gap:8px}
+.frag{
+  display:flex; align-items:center; gap:10px; text-align:left; width:100%; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); padding:10px 11px; font:inherit; color:inherit;
+  transition:border-color .14s, background .14s;
+}
+.frag:hover{border-color:var(--ink-3)}
+.frag[aria-pressed="true"]{border-color:var(--red-hot); background:rgba(207,32,40,.06)}
+.swatch{width:16px; height:24px; flex:none; border:1px solid rgba(0,0,0,.14)}
+.frag-t{min-width:0; display:flex; flex-direction:column; overflow:hidden}
+.frag-n{display:block; font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.03em; font-size:15px; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.frag-no{display:block; font-size:11.5px; line-height:1.3; color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+.sizes{display:flex; gap:8px; flex-wrap:wrap}
+.size{background:var(--surface); border:1px solid var(--line); padding:11px 18px; cursor:pointer; font:inherit; color:inherit; text-align:left; transition:border-color .14s,background .14s}
+.size:hover{border-color:var(--ink-3)}
+.size[aria-pressed="true"]{border-color:var(--red-hot); background:rgba(207,32,40,.06)}
+.size b{display:block; font-family:"Anton",sans-serif; font-weight:400; font-size:18px; letter-spacing:.02em}
+.size span{font-size:12.5px; color:var(--ink-3); font-variant-numeric:tabular-nums}
+
+.rels{display:flex; gap:6px; flex-wrap:wrap}
+.rel{
+  background:var(--surface); border:1px solid var(--line); padding:7px 13px; cursor:pointer; font:inherit;
+  font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.04em;
+  font-size:14px; color:inherit; transition:border-color .14s,background .14s,color .14s;
+}
+.rel:hover{border-color:var(--ink-3)}
+.rel[aria-pressed="true"]{border-color:var(--red-hot); background:var(--red-hot); color:#fff}
+.rel i{font-style:normal; text-transform:lowercase; letter-spacing:0; font-size:12px; color:var(--ink-3); margin-left:5px; font-family:"Barlow",sans-serif}
+.rel[aria-pressed="true"] i{color:rgba(255,255,255,.75)}
+
+textarea{
+  width:100%; min-height:84px; resize:vertical; background:var(--surface); color:var(--ink);
+  border:1px solid var(--line); padding:13px 14px;
+  font-family:"Barlow",sans-serif; font-size:19px; line-height:1.4;
+}
+textarea::placeholder{color:var(--ink-3); font-style:italic}
+textarea:focus{outline:2.5px solid var(--red-hot); outline-offset:0; border-color:transparent}
+.linefoot{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap; font-size:13px; color:var(--ink-3)}
+.linefoot button{background:none; border:none; padding:0; font:inherit; color:var(--red-hot); cursor:pointer; text-decoration:underline; text-underline-offset:2px}
+.count{font-variant-numeric:tabular-nums}
+.genrow{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:16px}
+.err{color:var(--red-deep); font-size:13.5px; margin:10px 0 0}
+.err[hidden]{display:none}
+
+/* reveal */
+.reveal{margin-top:22px; border:2px solid var(--red-hot); background:var(--surface); padding:24px}
+.reveal[hidden]{display:none}
+.reveal .lab{font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size:12px; color:var(--ink-3)}
+.gib{font-family:"Anton",sans-serif; font-size:clamp(34px,6.6vw,54px); line-height:1; color:var(--red-hot); margin:9px 0 0; text-transform:uppercase}
+.gloss{color:var(--ink-2); margin:13px 0 0; max-width:48ch; font-size:15.5px}
+.gloss em{color:var(--ink); font-style:italic}
+.rfoot{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:20px; padding-top:17px; border-top:1px solid var(--line)}
+.price{font-family:"Anton",sans-serif; font-size:24px; margin-right:auto; font-variant-numeric:tabular-nums}
+.price small{display:block; font-family:"Barlow Condensed",sans-serif; font-size:11.5px; letter-spacing:.08em; color:var(--ink-3)}
+
+/* stage */
+.stage-col{position:sticky; top:88px}
+@media (max-width:980px){ .stage-col{position:static; order:-1} }
+.stage{
+  background:linear-gradient(168deg, var(--cream-2), var(--cream));
+  border:1px solid var(--line); padding:14px 14px 4px; cursor:grab; touch-action:pan-y; user-select:none;
+}
+.stage:active{cursor:grabbing}
+.stage svg{display:block; width:100%; height:auto}
+.stage-foot{display:flex; justify-content:space-between; gap:10px; padding:9px 2px 0; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.09em; font-size:11.5px; color:var(--ink-3)}
+.spec{margin:16px 0 0; border-top:1px solid var(--line)}
+.spec div{display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px}
+.spec dt{color:var(--ink-3); font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.05em}
+.spec dd{margin:0; text-align:right; font-weight:500}
+
+/* wall */
+.wall{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:14px}
+.tile{background:var(--cream); border:1px solid var(--line); padding:16px 12px 12px; text-align:center}
+.tile svg{width:100%; max-width:104px; height:auto; display:block; margin:0 auto 10px}
+.tile b{display:block; font-family:"Anton",sans-serif; font-weight:400; font-size:16px; color:var(--red-hot); text-transform:uppercase; line-height:1.1}
+.tile span{display:block; font-size:12.5px; color:var(--ink-3); margin-top:4px}
+
+footer{background:var(--red); color:#fff; padding-block:34px}
+footer .fin{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; align-items:center}
+footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
+.disclaimer{background:var(--ink); color:#CFC3C1; font-size:12px; padding-block:12px}
+@media (prefers-reduced-motion:reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important} }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="t1"></div>
+</div>
+
+<header class="masthead">
+  <div class="wrap mast-in">
+    <a class="logo" href="#top"><b>BLA BLI BLU</b><s>PARFUMS</s></a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#studio">The Studio</a>
+      <a href="#wall">The Wall</a>
+      <a href="#studio">Build yours</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="kicker">The Gibberish Studio</div>
+      <h1>Everyone has their own way of <em>saying it</em>.</h1>
+      <p>Bla Bli Blu means I love you. So does “kuch khaaya?”. So does getting roasted by your best friend. Write the line that only the two of you understand — we'll turn it into three words and print it where our name usually goes.</p>
+      <a class="btn" href="#studio">Make your bottle</a>
+    </div>
+    <div class="hero-art"><svg id="heroBottle" viewBox="0 0 300 380" aria-hidden="true"></svg></div>
+  </div>
+</div>
+
+<div class="ticker black" aria-hidden="true">
+  <div class="ticker-inner" id="t2"></div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Four steps. One bottle nobody else has.</h2>
+      <p>The same 25% oil concentration parfum you already know — wearing a word that only exists between two people.</p>
+    </div>
+    <div class="steps4">
+      <div class="s4"><div class="n">01</div><h3>Pick the scent</h3><p>Fifteen fragrances across the parfum and oud ranges.</p></div>
+      <div class="s4"><div class="n">02</div><h3>Pick the size</h3><p>30ml, 75ml or the full 100ml bottle.</p></div>
+      <div class="s4"><div class="n">03</div><h3>Pick your person</h3><p>Bhai, Mumma, Nani, your best friend — anyone who'd get it.</p></div>
+      <div class="s4"><div class="n">04</div><h3>Write your line</h3><p>We turn it into three words, and print them on the glass.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="studio">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Build it</h2>
+      <p>Your line goes in. Three words come out — built from its own sounds, the way Bla / Bli / Blu is built from one.</p>
+    </div>
+    <div class="studio-grid">
+      <div class="panel">
+        <div class="step">
+          <div class="step-head"><span class="step-n">1</span><h3>Choose the fragrance</h3><span class="step-pick" id="pickFrag">Love Drunk</span></div>
+          <div class="frags" id="frags"></div>
+        </div>
+        <div class="step">
+          <div class="step-head"><span class="step-n">2</span><h3>Choose the size</h3><span class="step-pick">25% oil</span></div>
+          <div class="sizes" id="sizes"></div>
+        </div>
+        <div class="step">
+          <div class="step-head"><span class="step-n">3</span><h3>Who is it for?</h3><span class="step-pick" id="pickRel">Bhai</span></div>
+          <div class="rels" id="rels"></div>
+        </div>
+        <div class="step">
+          <div class="step-head"><span class="step-n">4</span><h3>Write your line</h3></div>
+          <label for="line" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your line</label>
+          <textarea id="line" maxlength="80" placeholder="oye pagle"></textarea>
+          <div class="linefoot">
+            <span>Stuck? Try <button type="button" id="suggestBtn">oye pagle</button></span>
+            <span class="count"><span id="count">0</span>/80</span>
+          </div>
+          <div class="genrow">
+            <button class="btn" id="genBtn" disabled>Turn it into gibberish</button>
+            <button class="btn-line" id="resetBtn" hidden>Start over</button>
+          </div>
+          <p class="err" id="err" hidden></p>
+        </div>
+
+        <div class="reveal" id="reveal" hidden>
+          <div class="lab">Your Bla Bli Blu</div>
+          <p class="gib" id="gib">— — —</p>
+          <p class="gloss" id="gloss"></p>
+          <div class="rfoot">
+            <div class="price"><span id="price">₹819</span><small id="priceNote">100ML · INCL. ₹99 PERSONALISATION</small></div>
+            <button class="btn-line" id="againBtn">Try another</button>
+            <button class="btn" id="cartBtn">Make my bottle</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-col">
+        <div class="stage" id="stage" tabindex="0" role="img" aria-label="Preview of your custom bottle. Drag or use arrow keys to turn it.">
+          <svg id="bottleSvg" viewBox="0 0 300 400" aria-hidden="true"></svg>
+        </div>
+        <div class="stage-foot"><span>Drag to turn ⟲</span><span id="rotLabel">0°</span></div>
+        <dl class="spec">
+          <div><dt>Fragrance</dt><dd id="sFrag">Love Drunk</dd></div>
+          <div><dt>Notes</dt><dd id="sNotes">Candied Nuts · Cinnamon · Dates</dd></div>
+          <div><dt>Size</dt><dd id="sSize">100 ML</dd></div>
+          <div><dt>For</dt><dd id="sRel">Bhai</dd></div>
+          <div><dt>Reads</dt><dd id="sLabel">BLA BLI BLU</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wall">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Everyone's got one</h2>
+      <p>Real lines, turned into words that mean nothing to anybody else. This is what the dictionary starts to look like.</p>
+    </div>
+    <div class="wall" id="wallGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fin">
+    <div class="logo"><b>BLA BLI BLU</b><s>PARFUMS</s></div>
+    <p>Against the ordinary. 25% oil concentration, 10–12 hours on skin, 15+ on fabric.</p>
+  </div>
+</footer>
+<div class="disclaimer"><div class="wrap">Concept prototype built for Case-O-Nova 8.0 — not an official Bla Bli Blu property. Fragrance names, notes and prices reflect the live range; bottle artwork is an illustration.</div></div>
+
+<script>
+(function(){
+  "use strict";
+  var FRAGS = [
+    {n:"Love Drunk",   no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C"},
+    {n:"Habibi",       no:"Coffee · Rose · Leather",         p:720, oud:false, c:"#6B3A2E"},
+    {n:"Lights Off",   no:"Passionfruit · Caramel · Amber",  p:720, oud:false, c:"#C96A2E"},
+    {n:"Old Money",    no:"Chamomile · Cedar · Vanilla",     p:720, oud:false, c:"#D6B97B"},
+    {n:"My Wingman",   no:"Cardamom · Tobacco · Cedar",      p:720, oud:false, c:"#8A5A3B"},
+    {n:"By The Beach", no:"Lemon · Bergamot · Apple",        p:560, oud:false, c:"#BFCB78"},
+    {n:"Hot AF",       no:"Blackcurrant · Lily · Truffle",   p:620, oud:false, c:"#7B2D4A"},
+    {n:"Cookie Crush", no:"Berries · Lilac · Vanilla",       p:660, oud:false, c:"#B96F86"},
+    {n:"Peaches",      no:"Rose · Orange · Musk",            p:660, oud:false, c:"#E39B6B"},
+    {n:"White Jazz",   no:"Jasmine · Tuberose",              p:720, oud:false, c:"#E3D9BC"},
+    {n:"Selfmade",     no:"Bourbon Vanilla · Bergamot",      p:640, oud:false, c:"#C69355"},
+    {n:"Golden Oud",   no:"Nutmeg · Saffron · Oud",          p:800, oud:true,  c:"#9C6B22"},
+    {n:"Vetiver Oud",  no:"Moroccan Rose · Amber · Oud",     p:760, oud:true,  c:"#5E3326"},
+    {n:"Oud Honey",    no:"Honey · Shamama · Oud",           p:760, oud:true,  c:"#A9711F"},
+    {n:"Ivory Oud",    no:"Musk · Patchouli · Oud",          p:660, oud:true,  c:"#CFC0A8"}
+  ];
+  var SIZES=[{ml:30,f:.45},{ml:75,f:.85},{ml:100,f:1}];
+  var FEE=99;
+  var RELS=[
+    {k:"Bhai",en:"brother",ex:"oye pagle"},
+    {k:"Behen",en:"sister",ex:"tu pagal hai"},
+    {k:"Mumma",en:"mother",ex:"kuch khaaya?"},
+    {k:"Papa",en:"father",ex:"gaadi dheere chalana"},
+    {k:"Nani",en:"grandma",ex:"aur sunao beta"},
+    {k:"Dadi",en:"grandma",ex:"khana kha ke jaana"},
+    {k:"Nana",en:"grandpa",ex:"padhai kaisi chal rahi"},
+    {k:"Dada",en:"grandpa",ex:"shaam ko milte hain"},
+    {k:"Masi",en:"aunt",ex:"aaya kyun nahi"},
+    {k:"Bua",en:"aunt",ex:"itna dubla kyun hai"},
+    {k:"Chachu",en:"uncle",ex:"paise chahiye?"},
+    {k:"Mama",en:"uncle",ex:"chal ghoomne chalte"},
+    {k:"Best friend",en:"",ex:"reach karke batana"},
+    {k:"Partner",en:"",ex:"khana kha liya?"},
+    {k:"Roommate",en:"",ex:"maggi bana du?"}
+  ];
+  var WALL=[
+    {w:["Pag","Pig","Pug"], line:"oye pagle", rel:"Bhai", oud:false},
+    {w:["Khaa","Khii","Khuu"], line:"kuch khaaya?", rel:"Mumma", oud:false},
+    {w:["Dhee","Dhii","Dhuu"], line:"gaadi dheere chalana", rel:"Papa", oud:true},
+    {w:["Sun","Sin","Sun"], line:"aur sunao beta", rel:"Nani", oud:false},
+    {w:["Rach","Rich","Ruch"], line:"reach karke batana", rel:"Best friend", oud:true},
+    {w:["Mag","Mig","Mug"], line:"maggi bana du?", rel:"Roommate", oud:false}
+  ];
+
+  var state={frag:0,size:2,rel:0,gib:null,rot:-0.08};
+  var $=function(i){return document.getElementById(i)};
+  var SVGNS="http://www.w3.org/2000/svg";
+
+  /* ---------- gibberish engine ---------- */
+  function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h)}
+  function clusters(s){
+    var t=s.toLowerCase().replace(/[^a-z ]/g," "),ws=t.split(/\s+/).filter(Boolean),out=[];
+    for(var i=0;i<ws.length;i++){
+      var m=ws[i].match(/^[bcdfghjklmnpqrstvwxyz]{1,3}/);
+      if(m&&m[0])out.push(m[0]);
+      else{var m2=ws[i].match(/[bcdfghjklmnpqrstvwxyz]{1,2}/); if(m2)out.push(m2[0])}
+    }
+    return out.length?out:["bl"];
+  }
+  function cap(w){return w.charAt(0).toUpperCase()+w.slice(1)}
+  function localGib(line){
+    var cs=clusters(line),h=hash(line||"bla");
+    var a=cs[h%cs.length]; if(a.length>3)a=a.slice(0,3);
+    var b=cs.length>1?cs[(h+1)%cs.length]:a; if(b.length>3)b=b.slice(0,3);
+    var tails=[["a","i","u"],["aa","ii","uu"],["ah","ih","uh"],["a","ee","oo"]][h%4];
+    var coda=["","m","n","","k",""][(h>>3)%6];
+    return [cap(a+tails[0]+coda),cap(b+tails[1]),cap(a+tails[2])];
+  }
+
+  /* ---------- bottle drawing ---------- */
+  // Silhouette: flared trumpet cap -> narrow waist -> convex shoulder -> straight body, rounded base.
+  function bottlePath(cx,topY,capHW,neckHW,neckY,shoulderY,bodyHW,baseY,r){
+    return "M"+(cx-capHW)+","+topY+
+      "L"+(cx+capHW)+","+topY+
+      "C"+(cx+capHW)+","+(topY+(neckY-topY)*0.22)+" "+(cx+neckHW+3)+","+(neckY-(neckY-topY)*0.44)+" "+(cx+neckHW)+","+neckY+
+      "C"+(cx+neckHW)+","+(neckY+(shoulderY-neckY)*0.18)+" "+(cx+bodyHW)+","+(shoulderY-(shoulderY-neckY)*0.62)+" "+(cx+bodyHW)+","+shoulderY+
+      "L"+(cx+bodyHW)+","+(baseY-r)+
+      "Q"+(cx+bodyHW)+","+baseY+" "+(cx+bodyHW-r)+","+baseY+
+      "L"+(cx-bodyHW+r)+","+baseY+
+      "Q"+(cx-bodyHW)+","+baseY+" "+(cx-bodyHW)+","+(baseY-r)+
+      "L"+(cx-bodyHW)+","+shoulderY+
+      "C"+(cx-bodyHW)+","+(shoulderY-(shoulderY-neckY)*0.62)+" "+(cx-neckHW)+","+(neckY+(shoulderY-neckY)*0.18)+" "+(cx-neckHW)+","+neckY+
+      "C"+(cx-neckHW-3)+","+(neckY-(neckY-topY)*0.44)+" "+(cx-capHW)+","+(topY+(neckY-topY)*0.22)+" "+(cx-capHW)+","+topY+"Z";
+  }
+  function el(name,attrs){
+    var e=document.createElementNS(SVGNS,name);
+    for(var k in attrs) e.setAttribute(k,attrs[k]);
+    return e;
+  }
+  function cylText(g,str,cy,size,fill,R,spread,family,weight,ls){
+    var ch=str.split(""),n=ch.length;
+    var step=Math.min(spread,(Math.PI*0.95)/Math.max(n,1));
+    for(var i=0;i<n;i++){
+      var phi=(i-(n-1)/2)*step+state.rot, c=Math.cos(phi);
+      if(c<=0.13) continue;
+      var px=150+R*Math.sin(phi);
+      var t=el("text",{x:0,y:0,"text-anchor":"middle","font-size":size,fill:fill,
+        "font-family":family||'"Anton", sans-serif',"font-weight":weight||400,
+        "letter-spacing":ls||0,opacity:Math.min(1,c*1.55).toFixed(2),
+        transform:"translate("+px.toFixed(2)+","+cy+") scale("+c.toFixed(3)+",1)"});
+      t.textContent=ch[i];
+      g.appendChild(t);
+    }
+  }
+  function shade(hex,amt){
+    var n=parseInt(hex.slice(1),16),r=(n>>16)+amt,gc=((n>>8)&255)+amt,b=(n&255)+amt;
+    var cl=function(v){return Math.max(0,Math.min(255,v))};
+    return "#"+((1<<24)+(cl(r)<<16)+(cl(gc)<<8)+cl(b)).toString(16).slice(1);
+  }
+
+  // opts: {svg, words, relLabel, fragName, notes, ml, oud, rot, interactive}
+  function renderBottle(o){
+    var svg=o.svg;
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var vb=svg.getAttribute("viewBox").split(" ");
+    var H=+vb[3];
+    var cs=getComputedStyle(document.documentElement);
+    var bodyCol=o.oud? (cs.getPropertyValue("--bottle-red").trim()||"#BE3A31")
+                     : (cs.getPropertyValue("--bottle-cream").trim()||"#F2ECE1");
+    var inkCol=o.oud? "#F2E7E3" : (cs.getPropertyValue("--red-hot").trim()||"#CF2028");
+    var subCol=o.oud? "rgba(242,231,227,.72)" : "rgba(120,60,55,.62)";
+
+    var sz=(o.sz==null)?1:o.sz, scale=0.86+0.14*sz;
+    var wF=0.84+0.16*sz;
+    var bodyHW=68*wF, capHW=56*wF, neckHW=13*wF;
+    var baseY=H-38, totalH=184+104*sz, topY=baseY-totalH;
+    var neckY=topY+46*wF, shoulderY=neckY+19, r=16;
+
+    var defs=el("defs",{});
+    var lg=el("linearGradient",{id:o.gid,x1:"0",y1:"0",x2:"1",y2:"0"});
+    lg.appendChild(el("stop",{offset:"0%","stop-color":shade(bodyCol,-38)}));
+    lg.appendChild(el("stop",{offset:"16%","stop-color":shade(bodyCol,-10)}));
+    lg.appendChild(el("stop",{offset:"42%","stop-color":shade(bodyCol,12)}));
+    lg.appendChild(el("stop",{offset:"70%","stop-color":shade(bodyCol,-6)}));
+    lg.appendChild(el("stop",{offset:"100%","stop-color":shade(bodyCol,-42)}));
+    defs.appendChild(lg);
+    svg.appendChild(defs);
+
+    svg.appendChild(el("ellipse",{cx:150,cy:baseY+9,rx:bodyHW*0.92,ry:7,fill:"#000",opacity:".14"}));
+    svg.appendChild(el("path",{d:bottlePath(150,topY,capHW,neckHW,neckY,shoulderY,bodyHW,baseY,r),fill:"url(#"+o.gid+")"}));
+    // cap seam
+    svg.appendChild(el("path",{d:"M"+(150-neckHW-1)+","+(neckY+3)+" Q150,"+(neckY+8)+" "+(150+neckHW+1)+","+(neckY+3),
+      fill:"none",stroke:"#000",opacity:".13","stroke-width":"1"}));
+
+    var g=el("g",{}); svg.appendChild(g);
+    var R=bodyHW-6, saved=state.rot;
+    if(typeof o.rot==="number") state.rot=o.rot;
+    var bodyTop=shoulderY, bodyH=baseY-shoulderY;
+    var big=25*scale, topLine=bodyTop+bodyH*0.16;
+
+    cylText(g,"BLA BLI BLU",topLine,8.5*scale,subCol,R,0.12,'"Barlow Condensed", sans-serif',700,"1.4");
+    for(var i=0;i<3;i++){
+      cylText(g,String(o.words[i]).toUpperCase(),topLine+20*scale+i*(big*1.04),big,inkCol,R,0.225);
+    }
+    cylText(g,("For "+o.relLabel).toUpperCase(),topLine+38*scale+2*(big*1.04),8*scale,subCol,R,0.11,'"Barlow Condensed", sans-serif',600,"1.1");
+    if(o.notes) cylText(g,o.notes.toUpperCase(),bodyTop+bodyH*0.80,6*scale,subCol,R,0.08,'"Barlow Condensed", sans-serif',600,".6");
+    cylText(g,o.ml+"ML  |  PARFUM",bodyTop+bodyH*0.89,6.8*scale,subCol,R,0.095,'"Barlow Condensed", sans-serif',600,".9");
+    state.rot=saved;
+  }
+
+  function words(){ return state.gib || ["BLA","BLI","BLU"]; }
+  function drawMain(){
+    var f=FRAGS[state.frag];
+    renderBottle({svg:$("bottleSvg"),gid:"gMain",words:words(),relLabel:RELS[state.rel].k,
+      fragName:f.n,notes:f.no,ml:SIZES[state.size].ml,oud:f.oud,sz:SIZES[state.size].f});
+  }
+
+  /* ---------- UI ---------- */
+  function fmt(n){return "₹"+n.toLocaleString("en-IN")}
+  function price(){return Math.round(FRAGS[state.frag].p*SIZES[state.size].f/10)*10+FEE}
+  function press(host,i){var k=host.children;for(var j=0;j<k.length;j++)k[j].setAttribute("aria-pressed",j===i)}
+
+  function build(){
+    var fh=$("frags");
+    FRAGS.forEach(function(f,i){
+      var b=document.createElement("button");
+      b.type="button"; b.className="frag"; b.setAttribute("aria-pressed",i===state.frag);
+      b.innerHTML='<span class="swatch" style="background:'+f.c+'"></span><span class="frag-t">'+
+        '<span class="frag-n">'+f.n+'</span><span class="frag-no">'+f.no+'</span></span>';
+      b.addEventListener("click",function(){state.frag=i;press(fh,i);render()});
+      fh.appendChild(b);
+    });
+    var sh=$("sizes");
+    SIZES.forEach(function(s,i){
+      var b=document.createElement("button");
+      b.type="button"; b.className="size"; b.setAttribute("aria-pressed",i===state.size);
+      b.innerHTML='<b>'+s.ml+' ML</b><span data-si="'+i+'"></span>';
+      b.addEventListener("click",function(){state.size=i;press(sh,i);render()});
+      sh.appendChild(b);
+    });
+    var rh=$("rels");
+    RELS.forEach(function(r,i){
+      var b=document.createElement("button");
+      b.type="button"; b.className="rel"; b.setAttribute("aria-pressed",i===state.rel);
+      b.innerHTML=r.k+(r.en?'<i>'+r.en+'</i>':'');
+      b.addEventListener("click",function(){
+        state.rel=i; press(rh,i);
+        $("line").placeholder=r.ex; $("suggestBtn").textContent=r.ex; render();
+      });
+      rh.appendChild(b);
+    });
+    // tickers
+    var t1=["COD AVAILABLE","FRAGRANCE BRAND OF THE YEAR","FREE SHIPPING","25% OIL CONCENTRATION"];
+    var t2=["SMELL IT, LOVE IT — OR GET 100% MONEY BACK","EVERY BOTTLE SAYS SOMETHING ONLY TWO PEOPLE UNDERSTAND","AGAINST THE ORDINARY"];
+    fillTicker($("t1"),t1); fillTicker($("t2"),t2);
+    // wall
+    var wg=$("wallGrid");
+    WALL.forEach(function(w,i){
+      var d=document.createElement("div"); d.className="tile";
+      var s=document.createElementNS(SVGNS,"svg");
+      s.setAttribute("viewBox","0 0 300 400"); s.setAttribute("aria-hidden","true");
+      d.appendChild(s);
+      var b=document.createElement("b"); b.textContent=w.w.join(" ");
+      var sp=document.createElement("span"); sp.textContent='"'+w.line+'" · for '+w.rel;
+      d.appendChild(b); d.appendChild(sp); wg.appendChild(d);
+      renderBottle({svg:s,gid:"gw"+i,words:w.w,relLabel:w.rel,fragName:"",notes:"",ml:100,oud:w.oud,rot:-0.06,sz:1});
+    });
+  }
+  function fillTicker(host,items){
+    var one=items.map(function(s){return s+'<i>|</i>'}).join("");
+    var span=document.createElement("span"); span.innerHTML=one+one+one+one;
+    var span2=span.cloneNode(true);
+    host.appendChild(span); host.appendChild(span2);
+  }
+
+  function render(){
+    var f=FRAGS[state.frag],s=SIZES[state.size],r=RELS[state.rel];
+    $("pickFrag").textContent=f.n; $("pickRel").textContent=r.k;
+    $("sFrag").textContent=f.n; $("sNotes").textContent=f.no;
+    $("sSize").textContent=s.ml+" ML"; $("sRel").textContent=r.k;
+    $("sLabel").textContent=words().join(" ").toUpperCase();
+    $("price").textContent=fmt(price());
+    $("priceNote").textContent=s.ml+"ML · INCL. ₹99 PERSONALISATION";
+    var sp=document.querySelectorAll("[data-si]");
+    for(var i=0;i<sp.length;i++){
+      sp[i].textContent=fmt(Math.round(f.p*SIZES[+sp[i].getAttribute("data-si")].f/10)*10);
+    }
+    $("genBtn").disabled=$("line").value.trim().length<2;
+    drawMain();
+    renderBottle({svg:$("heroBottle"),gid:"gHero",words:["BLA","BLI","BLU"],relLabel:"You",
+      fragName:"Love Drunk",notes:"Candied Nuts · Cinnamon · Dates",ml:100,oud:false,rot:-0.07,sz:1});
+  }
+
+  /* ---------- spin ---------- */
+  var vel=0,drag=false,lastX=0,raf=null;
+  function norm(){while(state.rot>Math.PI)state.rot-=Math.PI*2;while(state.rot<-Math.PI)state.rot+=Math.PI*2}
+  function lab(){$("rotLabel").textContent=Math.round(state.rot*180/Math.PI)+"°"}
+  function tick(){
+    if(!drag){
+      vel*=0.94;
+      if(Math.abs(vel)<0.0004){vel=0;raf=null;return}
+      state.rot+=vel; norm(); drawMain(); lab();
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  var stage=$("stage");
+  stage.addEventListener("pointerdown",function(e){drag=true;lastX=e.clientX;vel=0;stage.setPointerCapture(e.pointerId)});
+  stage.addEventListener("pointermove",function(e){
+    if(!drag)return;
+    var d=(e.clientX-lastX)*0.011; lastX=e.clientX;
+    state.rot+=d; vel=d; norm(); drawMain(); lab();
+  });
+  function up(){if(drag){drag=false; if(!raf)raf=requestAnimationFrame(tick)}}
+  stage.addEventListener("pointerup",up); stage.addEventListener("pointercancel",up);
+  stage.addEventListener("keydown",function(e){
+    if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();state.rot+=(e.key==="ArrowLeft"?-0.18:0.18);norm();drawMain();lab()}
+  });
+
+  /* ---------- generation ---------- */
+  var sampleFn=null,timer=null;
+  if(window.claude&&typeof window.claude.use==="function"){
+    window.claude.use("sample").then(function(s){sampleFn=s}).catch(function(){sampleFn=null});
+  }
+  var POOL="BLAIUMKHPRTSCHNDGVZ";
+  function scramble(on){
+    if(timer){clearInterval(timer);timer=null}
+    if(!on)return;
+    timer=setInterval(function(){
+      var out=[];
+      for(var w=0;w<3;w++){var s="",L=3+(w%2);for(var i=0;i<L;i++)s+=POOL[Math.floor(Math.random()*POOL.length)];out.push(s)}
+      $("gib").textContent=out.join(" "); state.gib=out; drawMain();
+    },70);
+  }
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function show(w,gloss){
+    state.gib=w.map(function(x){return String(x).slice(0,10)});
+    $("gib").textContent=state.gib.join(" ");
+    $("gloss").innerHTML=gloss||('Three words that mean <em>'+esc($("line").value.trim())+'</em> — and nothing at all to anyone but '+esc(RELS[state.rel].k)+'.');
+    $("reveal").hidden=false; $("resetBtn").hidden=false; render();
+  }
+  function noteFor(code){
+    if(!code||code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled"||code==="capability_removed")return "";
+    if(code==="rate_limited")return "Busy right now — this one came from the studio's own engine.";
+    return "Couldn't reach the model — this one came from the studio's own engine.";
+  }
+  async function generate(){
+    var line=$("line").value.trim(); if(line.length<2)return;
+    var r=RELS[state.rel],btn=$("genBtn");
+    btn.disabled=true; btn.textContent="Generating…"; $("err").hidden=true;
+    $("reveal").hidden=false; $("gloss").textContent="";
+    scramble(true);
+    var fb=localGib(line);
+    var done=function(w,gloss,note){
+      scramble(false); show(w,gloss);
+      btn.disabled=false; btn.textContent="Turn it into gibberish";
+      if(note){$("err").textContent=note;$("err").hidden=false}
+    };
+    if(!sampleFn){ setTimeout(function(){done(fb,null,null)},850); return; }
+    var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose name is gibberish meaning "I love you".\n'+
+      'The pattern: ONE consonant cluster repeated three times with the vowel shifting (Bla / Bli / Blu).\n\n'+
+      'Someone is gifting a bottle to their '+r.k+(r.en?" ("+r.en+")":"")+'.\nTheir line is: "'+line+'"\n\n'+
+      'Invent THREE nonsense words in that pattern, built from the sounds of their line. Rules: 3-6 letters each; '+
+      'pronounceable by a Hindi or English speaker; NOT a real word in any language; must echo the consonants of their line; Title Case.\n'+
+      'Also write one warm sentence (max 22 words) on what these words now mean between these two people.\n\n'+
+      'Reply with only JSON: {"words":["Xxx","Xxx","Xxx"],"meaning":"..."}';
+    try{
+      var d=await sampleFn.json(prompt,{modelTier:"quick",cache:false});
+      var w=(d&&Array.isArray(d.words))?d.words.filter(Boolean).slice(0,3):null;
+      if(!w||w.length!==3) throw {code:"invalid_json"};
+      done(w,d.meaning?esc(String(d.meaning)):null,null);
+    }catch(e){ done(fb,null,noteFor(e&&e.code)); }
+  }
+
+  $("line").addEventListener("input",function(){
+    $("count").textContent=this.value.length;
+    $("genBtn").disabled=this.value.trim().length<2;
+  });
+  $("suggestBtn").addEventListener("click",function(){
+    $("line").value=RELS[state.rel].ex; $("count").textContent=$("line").value.length;
+    $("genBtn").disabled=false; $("line").focus();
+  });
+  $("genBtn").addEventListener("click",generate);
+  $("againBtn").addEventListener("click",generate);
+  $("cartBtn").addEventListener("click",function(){
+    var b=this,o=b.textContent; b.textContent="Added — "+words().join(" ");
+    setTimeout(function(){b.textContent=o},2200);
+  });
+  $("resetBtn").addEventListener("click",function(){
+    state.gib=null; $("reveal").hidden=true; this.hidden=true;
+    $("line").value=""; $("count").textContent="0"; $("genBtn").disabled=true; $("err").hidden=true; render();
+  });
+
+  build();
+  $("line").placeholder=RELS[0].ex; $("suggestBtn").textContent=RELS[0].ex;
+  render(); lab();
+})();
+</script>
+</body>
+</html>
