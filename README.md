@@ -11,8 +11,8 @@ words that get printed on the bottle where BLA BLI BLU normally goes.
 
 ## Live demo
 
-Once this repo has GitHub Pages turned on (see below), put the live link here so the jury can open
-it directly: `https://<username>.github.io/<repo>/`
+Once GitHub Pages is turned on for this repo (see below), the live link goes here so the jury can
+open it directly: `https://sharmasambhav25.github.io/Bla-Bli-Blu/`
 
 ## Running it
 
@@ -24,19 +24,16 @@ python3 -m http.server 8000
 
 ## Publishing on GitHub Pages
 
-This folder is already its own git repo (separate from any other project) with the first commit
-made. To push it up:
+The files already live in this repo (`sharmasambhav25/Bla-Bli-Blu`). Two steps left, both in
+Settings:
 
-1. On GitHub, create a new **empty** repository (no README/license/gitignore) — e.g. `bla-bli-blu-studio`.
-2. In this folder, point it at that repo and push:
-   ```
-   git remote add origin https://github.com/<username>/<repo>.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. Settings → Pages → Source: `Deploy from a branch` → `main` / `root`.
-4. The site goes live at `https://<username>.github.io/<repo>/` in about a minute — drop that link
-   into the "Live demo" section above before you send it to the jury.
+1. **Settings → General → Danger Zone → Change visibility → make it Public.** GitHub Pages on the
+   free plan only serves public repos, so this repo needs to switch from Private to Public before
+   Pages will turn on. (Nothing sensitive lives here — it's a UI prototype and a README.)
+2. **Settings → Pages → Source: `Deploy from a branch` → `main` / `root` → Save.**
+
+The site goes live at `https://sharmasambhav25.github.io/Bla-Bli-Blu/` within a minute or two —
+that's the link for the jury.
 
 ## How the gibberish works
 
