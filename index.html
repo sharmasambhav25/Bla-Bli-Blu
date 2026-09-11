@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bla Bli Blu Gibberish Studio</title>
-<meta name="description" content="Everyone has their own way of saying I love you. Turn yours into three words and print it on the bottle.">
+<title>Bla Bli Blu Words Studio</title>
+<meta name="description" content="Tell us about the person you're gifting this to. We'll turn it into the three words that become their version of I love you.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
@@ -87,7 +87,7 @@ h1{font-size:clamp(40px,7vw,78px); line-height:.92; color:var(--ink)}
 h1 em{font-style:normal; color:var(--red-hot)}
 .hero p{font-size:17.5px; color:var(--ink-2); max-width:46ch; margin:20px 0 26px}
 .hero-art{display:flex; justify-content:center}
-.hero-art img{width:100%; max-width:330px; height:auto; display:block; border:1px solid var(--line); background:#EFECE7}
+.hero-art svg{width:100%; max-width:290px; height:auto}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -143,7 +143,7 @@ section{padding-block:60px}
 }
 .frag:hover{border-color:var(--ink-3)}
 .frag[aria-pressed="true"]{border-color:var(--red-hot); background:rgba(207,32,40,.06)}
-.thumb{width:30px; height:38px; flex:none; object-fit:cover; border:1px solid rgba(0,0,0,.12); background:#EFECE7}
+.swatch{width:16px; height:24px; flex:none; border:1px solid rgba(0,0,0,.14)}
 .frag-t{min-width:0; display:flex; flex-direction:column; overflow:hidden}
 .frag-n{display:block; font-family:"Barlow Condensed",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.03em; font-size:15px; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .frag-no{display:block; font-size:11.5px; line-height:1.3; color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -199,17 +199,7 @@ textarea:focus{outline:2.5px solid var(--red-hot); outline-offset:0; border-colo
   border:1px solid var(--line); padding:14px 14px 4px; cursor:grab; touch-action:pan-y; user-select:none;
 }
 .stage:active{cursor:grabbing}
-.shot{position:relative; aspect-ratio:1/1; container-type:inline-size; will-change:transform}
-.shot img.ph{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
-.shot>svg{position:absolute; inset:0; width:100%; height:100%}
-.shot .label{
-  position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; font-family:"Anton",sans-serif; text-transform:uppercase; line-height:1.04;
-  letter-spacing:.02em; background:var(--labbg,#F1EAE0); color:var(--labink,#CF2028);
-  box-shadow:0 0 9px 5px var(--labbg,#F1EAE0); border-radius:1px;
-}
-.shot .label span{font-size:2.75cqw; display:block}
-.shot .label span+span{margin-top:.2cqw}
+.stage svg{display:block; width:100%; height:auto}
 .stage-foot{display:flex; justify-content:space-between; gap:10px; padding:9px 2px 0; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.09em; font-size:11.5px; color:var(--ink-3)}
 .spec{margin:16px 0 0; border-top:1px solid var(--line)}
 .spec div{display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px}
@@ -219,7 +209,7 @@ textarea:focus{outline:2.5px solid var(--red-hot); outline-offset:0; border-colo
 /* wall */
 .wall{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:14px}
 .tile{background:var(--cream); border:1px solid var(--line); padding:16px 12px 12px; text-align:center}
-.tile .shot{width:100%; max-width:118px; margin:0 auto 10px}
+.tile svg{width:100%; max-width:104px; height:auto; display:block; margin:0 auto 10px}
 .tile b{display:block; font-family:"Anton",sans-serif; font-weight:400; font-size:16px; color:var(--red-hot); text-transform:uppercase; line-height:1.1}
 .tile span{display:block; font-size:12.5px; color:var(--ink-3); margin-top:4px}
 
@@ -251,12 +241,12 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div class="hero" id="top">
   <div class="wrap hero-in">
     <div>
-      <div class="kicker">The Gibberish Studio</div>
+      <div class="kicker">The Words Studio</div>
       <h1>Everyone has their own way of <em>saying it</em>.</h1>
-      <p>Bla Bli Blu means I love you. So does “kuch khaaya?”. So does getting roasted by your best friend. Write the line that only the two of you understand — we'll turn it into three words and print it where our name usually goes.</p>
+      <p>Bla Bli Blu means I love you. So does "the one who still checks if I've eaten." Tell us about the person you're gifting this to — we'll turn what you write into the three words that are your version of it, printed where our name usually goes.</p>
       <a class="btn" href="#studio">Make your bottle</a>
     </div>
-    <div class="hero-art"><img src="images/hero-set.jpg" width="800" height="800" alt="The Bla Bli Blu parfum set — six labelled travel sprays arranged around the red BLA BLI BLU box"></div>
+    <div class="hero-art"><svg id="heroBottle" viewBox="0 0 300 380" aria-hidden="true"></svg></div>
   </div>
 </div>
 
@@ -268,13 +258,13 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   <div class="wrap">
     <div class="sec-head">
       <h2>Four steps. One bottle nobody else has.</h2>
-      <p>The same 25% oil concentration parfum you already know — wearing a word that only exists between two people.</p>
+      <p>The same 25% oil concentration parfum you already know — wearing three words that only exist for one person.</p>
     </div>
     <div class="steps4">
       <div class="s4"><div class="n">01</div><h3>Pick the scent</h3><p>Fifteen fragrances across the parfum and oud ranges.</p></div>
       <div class="s4"><div class="n">02</div><h3>Pick the size</h3><p>30ml, 75ml or the full 100ml bottle.</p></div>
       <div class="s4"><div class="n">03</div><h3>Pick your person</h3><p>Bhai, Mumma, Nani, your best friend — anyone who'd get it.</p></div>
-      <div class="s4"><div class="n">04</div><h3>Write your line</h3><p>We turn it into three words, and print them on the glass.</p></div>
+      <div class="s4"><div class="n">04</div><h3>Tell us about them</h3><p>We turn it into their three words, and print them on the glass.</p></div>
     </div>
   </div>
 </section>
@@ -283,7 +273,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   <div class="wrap">
     <div class="sec-head">
       <h2>Build it</h2>
-      <p>Your line goes in. Three words come out — built from its own sounds, the way Bla / Bli / Blu is built from one.</p>
+      <p>Tell us about them. Three words come out — pulled from what you actually wrote, not a phrase everyone else uses too.</p>
     </div>
     <div class="studio-grid">
       <div class="panel">
@@ -300,15 +290,15 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
           <div class="rels" id="rels"></div>
         </div>
         <div class="step">
-          <div class="step-head"><span class="step-n">4</span><h3>Write your line</h3></div>
-          <label for="line" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your line</label>
-          <textarea id="line" maxlength="80" placeholder="oye pagle"></textarea>
+          <div class="step-head"><span class="step-n">4</span><h3>Tell us about them</h3></div>
+          <label for="line" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">About them</label>
+          <textarea id="line" maxlength="220" placeholder="the one who's annoyed me since we shared a room, and still has my back"></textarea>
           <div class="linefoot">
-            <span>Stuck? Try <button type="button" id="suggestBtn">oye pagle</button></span>
-            <span class="count"><span id="count">0</span>/80</span>
+            <span>Stuck? <button type="button" id="suggestBtn">Give me an example</button></span>
+            <span class="count"><span id="count">0</span>/220</span>
           </div>
           <div class="genrow">
-            <button class="btn" id="genBtn" disabled>Turn it into gibberish</button>
+            <button class="btn" id="genBtn" disabled>Find their three words</button>
             <button class="btn-line" id="resetBtn" hidden>Start over</button>
           </div>
           <p class="err" id="err" hidden></p>
@@ -327,10 +317,10 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
       </div>
 
       <div class="stage-col">
-        <div class="stage" id="stage" tabindex="0" role="img" aria-label="Preview of your custom bottle. Drag or use arrow keys to tilt it.">
-          <div class="shot" id="shot"></div>
+        <div class="stage" id="stage" tabindex="0" role="img" aria-label="Preview of your custom bottle. Drag or use arrow keys to turn it.">
+          <svg id="bottleSvg" viewBox="0 0 300 400" aria-hidden="true"></svg>
         </div>
-        <div class="stage-foot"><span>Drag to tilt ⟲</span><span id="rotLabel">0°</span></div>
+        <div class="stage-foot"><span>Drag to turn ⟲</span><span id="rotLabel">0°</span></div>
         <dl class="spec">
           <div><dt>Fragrance</dt><dd id="sFrag">Love Drunk</dd></div>
           <div><dt>Notes</dt><dd id="sNotes">Candied Nuts · Cinnamon · Dates</dd></div>
@@ -347,7 +337,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   <div class="wrap">
     <div class="sec-head">
       <h2>Everyone's got one</h2>
-      <p>Real lines, turned into words that mean nothing to anybody else. This is what the dictionary starts to look like.</p>
+      <p>Real messages, turned into the three words that say it for them. Nobody else's version reads the same.</p>
     </div>
     <div class="wall" id="wallGrid"></div>
   </div>
@@ -359,82 +349,91 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     <p>Against the ordinary. 25% oil concentration, 10–12 hours on skin, 15+ on fabric.</p>
   </div>
 </footer>
-<div class="disclaimer"><div class="wrap">Concept prototype built for Case-O-Nova 8.0 — not an official Bla Bli Blu property. Fragrance names, notes and prices reflect the live range; bottle photography is Bla Bli Blu's own product photography, used here for the concept demo.</div></div>
+<div class="disclaimer"><div class="wrap">Concept prototype built for Case-O-Nova 8.0 — not an official Bla Bli Blu property. Fragrance names, notes and prices reflect the live range; bottle artwork is an illustration.</div></div>
 
 <script>
 (function(){
   "use strict";
-  /* Label-zone presets: [left%, top%, width%, height%] of the photo — where the printed
-     fragrance name sits on the bottle, so the custom words can be printed over it. */
-  var LAB_CAN=[49,59,40,9.5];   // studio shot: red canister left, bottle right
-  var LAB_SOLO=[31,50,38,9.5];  // studio shot: single bottle, centred
   var FRAGS = [
-    {n:"Love Drunk",   no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C", img:"images/love-drunk.jpg",  lab:LAB_CAN,  op:"70% 62%"},
-    {n:"Habibi",       no:"Coffee · Rose · Leather",         p:720, oud:false, c:"#6B3A2E", img:"images/habibi.jpg",      lab:LAB_CAN,  op:"70% 62%"},
-    {n:"Lights Off",   no:"Passionfruit · Caramel · Amber",  p:720, oud:false, c:"#C96A2E", img:"images/lights-off.jpg",  lab:LAB_SOLO, op:"50% 55%"},
-    {n:"Old Money",    no:"Chamomile · Cedar · Vanilla",     p:720, oud:false, c:"#D6B97B", img:"images/old-money.jpg",   lab:LAB_CAN,  op:"70% 62%"},
-    {n:"My Wingman",   no:"Cardamom · Tobacco · Cedar",      p:720, oud:false, c:"#8A5A3B", img:"images/my-wingman.jpg",  lab:LAB_CAN,  op:"70% 62%"},
-    {n:"By The Beach", no:"Lemon · Bergamot · Apple",        p:560, oud:false, c:"#BFCB78", img:"images/by-the-beach.jpg",lab:LAB_SOLO, op:"50% 55%"},
-    {n:"Hot AF",       no:"Blackcurrant · Lily · Truffle",   p:620, oud:false, c:"#7B2D4A", img:"images/hot-af.jpg",      lab:LAB_CAN,  op:"70% 62%"},
-    {n:"Cookie Crush", no:"Berries · Lilac · Vanilla",       p:660, oud:false, c:"#B96F86", img:"images/cookie-crush.jpg",lab:[52.5,61.3,44,10.3], op:"74% 64%"},
-    {n:"Peaches",      no:"Rose · Orange · Musk",            p:660, oud:false, c:"#E39B6B", img:"images/peaches.jpg",     lab:LAB_CAN,  op:"70% 62%"},
-    {n:"White Jazz",   no:"Jasmine · Tuberose",              p:720, oud:false, c:"#E3D9BC", img:"images/white-jazz.jpg",  lab:LAB_SOLO, op:"50% 55%"},
-    {n:"Selfmade",     no:"Bourbon Vanilla · Bergamot",      p:640, oud:false, c:"#C69355", img:"images/selfmade.jpg",    lab:[49,60.5,41,9.5], op:"70% 64%"},
-    {n:"Golden Oud",   no:"Nutmeg · Saffron · Oud",          p:800, oud:true,  c:"#9C6B22", img:"images/golden-oud.jpg",  lab:LAB_CAN,  op:"70% 62%"},
-    {n:"Vetiver Oud",  no:"Moroccan Rose · Amber · Oud",     p:760, oud:true,  c:"#5E3326", img:"images/vetiver-oud.jpg", lab:LAB_CAN,  op:"70% 62%"},
-    {n:"Oud Honey",    no:"Honey · Shamama · Oud",           p:760, oud:true,  c:"#A9711F", img:"images/oud-honey.jpg",   lab:LAB_SOLO, op:"50% 55%"},
-    {n:"Ivory Oud",    no:"Musk · Patchouli · Oud",          p:660, oud:true,  c:"#CFC0A8", img:"images/ivory-oud.jpg",   lab:LAB_CAN,  op:"70% 62%"}
+    {n:"Love Drunk",   no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C"},
+    {n:"Habibi",       no:"Coffee · Rose · Leather",         p:720, oud:false, c:"#6B3A2E"},
+    {n:"Lights Off",   no:"Passionfruit · Caramel · Amber",  p:720, oud:false, c:"#C96A2E"},
+    {n:"Old Money",    no:"Chamomile · Cedar · Vanilla",     p:720, oud:false, c:"#D6B97B"},
+    {n:"My Wingman",   no:"Cardamom · Tobacco · Cedar",      p:720, oud:false, c:"#8A5A3B"},
+    {n:"By The Beach", no:"Lemon · Bergamot · Apple",        p:560, oud:false, c:"#BFCB78"},
+    {n:"Hot AF",       no:"Blackcurrant · Lily · Truffle",   p:620, oud:false, c:"#7B2D4A"},
+    {n:"Cookie Crush", no:"Berries · Lilac · Vanilla",       p:660, oud:false, c:"#B96F86"},
+    {n:"Peaches",      no:"Rose · Orange · Musk",            p:660, oud:false, c:"#E39B6B"},
+    {n:"White Jazz",   no:"Jasmine · Tuberose",              p:720, oud:false, c:"#E3D9BC"},
+    {n:"Selfmade",     no:"Bourbon Vanilla · Bergamot",      p:640, oud:false, c:"#C69355"},
+    {n:"Golden Oud",   no:"Nutmeg · Saffron · Oud",          p:800, oud:true,  c:"#9C6B22"},
+    {n:"Vetiver Oud",  no:"Moroccan Rose · Amber · Oud",     p:760, oud:true,  c:"#5E3326"},
+    {n:"Oud Honey",    no:"Honey · Shamama · Oud",           p:760, oud:true,  c:"#A9711F"},
+    {n:"Ivory Oud",    no:"Musk · Patchouli · Oud",          p:660, oud:true,  c:"#CFC0A8"}
   ];
   var SIZES=[{ml:30,f:.45},{ml:75,f:.85},{ml:100,f:1}];
   var FEE=99;
   var RELS=[
-    {k:"Bhai",en:"brother",ex:"oye pagle"},
-    {k:"Behen",en:"sister",ex:"tu pagal hai"},
-    {k:"Mumma",en:"mother",ex:"kuch khaaya?"},
-    {k:"Papa",en:"father",ex:"gaadi dheere chalana"},
-    {k:"Nani",en:"grandma",ex:"aur sunao beta"},
-    {k:"Dadi",en:"grandma",ex:"khana kha ke jaana"},
-    {k:"Nana",en:"grandpa",ex:"padhai kaisi chal rahi"},
-    {k:"Dada",en:"grandpa",ex:"shaam ko milte hain"},
-    {k:"Masi",en:"aunt",ex:"aaya kyun nahi"},
-    {k:"Bua",en:"aunt",ex:"itna dubla kyun hai"},
-    {k:"Chachu",en:"uncle",ex:"paise chahiye?"},
-    {k:"Mama",en:"uncle",ex:"chal ghoomne chalte"},
-    {k:"Best friend",en:"",ex:"reach karke batana"},
-    {k:"Partner",en:"",ex:"khana kha liya?"},
-    {k:"Roommate",en:"",ex:"maggi bana du?"}
+    {k:"Bhai",en:"brother",ex:"the one who's annoyed me since we shared a room, and still has my back"},
+    {k:"Behen",en:"sister",ex:"loud, dramatic, and the first person I call when something's wrong"},
+    {k:"Mumma",en:"mother",ex:"still asks if I've eaten, no matter how old I get"},
+    {k:"Papa",en:"father",ex:"quiet about it, but never once missed what I actually needed"},
+    {k:"Nani",en:"grandma",ex:"spoils me rotten and pretends every time that she doesn't"},
+    {k:"Dadi",en:"grandma",ex:"tells the same story every single time and I never get tired of it"},
+    {k:"Nana",en:"grandpa",ex:"taught me to be stubborn, in the best possible way"},
+    {k:"Dada",en:"grandpa",ex:"still calls me by the nickname he gave me at five"},
+    {k:"Masi",en:"aunt",ex:"basically my second mother, minus all of the lectures"},
+    {k:"Bua",en:"aunt",ex:"the loudest, funniest person at every single family function"},
+    {k:"Chachu",en:"uncle",ex:"the fun uncle who has always taken my side"},
+    {k:"Mama",en:"uncle",ex:"the one relative who actually listens instead of advising"},
+    {k:"Best friend",en:"",ex:"knows exactly what I mean before I finish the sentence"},
+    {k:"Partner",en:"",ex:"the one person I never have to perform for"},
+    {k:"Roommate",en:"",ex:"turned a random flat into the closest thing to home"}
   ];
   var WALL=[
-    {w:["Pa","Pi","Pu"], line:"oye pagle", rel:"Bhai", oud:false, img:"images/love-drunk.jpg",  lab:LAB_CAN},
-    {w:["Ka","Ki","Ku"], line:"kuch khaaya?", rel:"Mumma", oud:false, img:"images/peaches.jpg", lab:LAB_CAN},
-    {w:["Ga","Gi","Gu"], line:"gaadi dheere chalana", rel:"Papa", oud:true, img:"images/vetiver-oud.jpg", lab:LAB_CAN},
-    {w:["Ja","Ji","Ju"], line:"khana kha ke jaana", rel:"Dadi", oud:false, img:"images/white-jazz.jpg", lab:LAB_SOLO},
-    {w:["Ra","Ri","Ru"], line:"padhai kaisi chal rahi", rel:"Nana", oud:true, img:"images/golden-oud.jpg", lab:LAB_CAN},
-    {w:["Da","Di","Du"], line:"maggi bana du?", rel:"Roommate", oud:false, img:"images/by-the-beach.jpg", lab:LAB_SOLO}
+    {w:["Annoyed","Room","Back"], line:"the one who's annoyed me since we shared a room, and still has my back", rel:"Bhai", oud:false},
+    {w:["Asks","Matter","Old"], line:"still asks if I've eaten, no matter how old I get", rel:"Mumma", oud:false},
+    {w:["Quiet","Actually","Needed"], line:"quiet about it, but never once missed what I actually needed", rel:"Papa", oud:true},
+    {w:["Spoils","Pretends","Doesn't"], line:"spoils me rotten and pretends every time that she doesn't", rel:"Nani", oud:false},
+    {w:["Knows","Before","Sentence"], line:"knows exactly what I mean before I finish the sentence", rel:"Best friend", oud:true},
+    {w:["Turned","Closest","Home"], line:"turned a random flat into the closest thing to home", rel:"Roommate", oud:false}
   ];
 
-  var state={frag:0,size:2,rel:0,gib:null,rot:-0.08,tilt:0};
+  var state={frag:0,size:2,rel:0,gib:null,rot:-0.08};
   var $=function(i){return document.getElementById(i)};
   var SVGNS="http://www.w3.org/2000/svg";
 
-  /* ---------- gibberish engine ---------- */
-  // Same rule Bla Bli Blu itself follows: ONE short consonant sound, repeated three times,
-  // vowel shifting A -> I -> U. No coda, no cluster longer than two letters -> always
-  // legible and sayable on the first try, and visibly a sibling of the brand name.
-  function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h)}
-  function clusters(s){
-    var t=s.toLowerCase().replace(/[^a-z ]/g," "),ws=t.split(/\s+/).filter(Boolean),out=[];
-    for(var i=0;i<ws.length;i++){
-      var m=ws[i].match(/^[bcdfghjklmnpqrstvwxyz]{1,2}/);
-      if(m&&m[0])out.push(m[0]);
-    }
-    return out.length?out:["bl"];
-  }
+  /* ---------- three-words engine ---------- */
+  // No more invented sounds: the words on the bottle are real, and they're pulled straight
+  // out of what the giver actually wrote about the person. The live model (when it's running)
+  // reads the whole message and picks the three words that best capture them. Offline — like on
+  // GitHub Pages, with no model to call — this engine falls back to honest extraction: it strips
+  // filler words out of the message and keeps three real, distinct words from what was written,
+  // spread across the message rather than clumped in one place.
   function cap(w){return w.charAt(0).toUpperCase()+w.slice(1)}
-  function localGib(line){
-    var cs=clusters(line),h=hash(line||"bla");
-    var c=cs[h%cs.length];
-    return [cap(c+"a"),cap(c+"i"),cap(c+"u")];
+  var STOP={the:1,a:1,an:1,and:1,or:1,but:1,of:1,to:1,in:1,on:1,at:1,for:1,with:1,is:1,are:1,was:1,were:1,be:1,been:1,being:1,
+    i:1,you:1,he:1,she:1,it:1,we:1,they:1,my:1,your:1,his:1,her:1,its:1,our:1,their:1,me:1,him:1,them:1,us:1,
+    this:1,that:1,these:1,those:1,so:1,just:1,also:1,very:1,really:1,still:1,even:1,never:1,always:1,not:1,no:1,
+    "do":1,"does":1,"did":1,"doing":1,"have":1,"has":1,"had":1,"having":1,"will":1,"would":1,"can":1,"could":1,"should":1,"shall":1,"may":1,"might":1,"must":1,
+    "if":1,"then":1,"than":1,"as":1,"when":1,"who":1,"whom":1,"which":1,"what":1,"how":1,"why":1,"because":1,"since":1,"while":1,"about":1,"into":1,"onto":1,"from":1,"by":1,
+    "up":1,"down":1,"out":1,"over":1,"under":1,"again":1,"more":1,"most":1,"some":1,"any":1,"all":1,"one":1,"two":1,"get":1,"got":1,"gets":1,"make":1,"makes":1,"made":1,
+    "am":1,"too":1,"every":1,"everyone":1,"someone":1,"something":1,"anything":1,"once":1,
+    "who's":1,"it's":1,"i've":1,"don't":1,"didn't":1,"wasn't":1,"weren't":1,"haven't":1,"hasn't":1,"wouldn't":1,"couldn't":1,"shouldn't":1,"that's":1,"there's":1,"what's":1,"let's":1,"i'm":1,"i'll":1,"i'd":1};
+  var FILLER=["Home","Steady","Ours","Close","Forever","Warmth"];
+  function tokenize(line){
+    return line.toLowerCase().replace(/[^a-z' ]/g," ").split(/\s+/).filter(function(w){return w.length>=3&&!STOP[w]});
+  }
+  function localWords(line){
+    var toks=tokenize(line),seen={},uniq=[];
+    toks.forEach(function(w){var stem=w.slice(0,5);if(!seen[stem]){seen[stem]=true;uniq.push(w)}});
+    var out=[];
+    if(uniq.length){
+      var n=uniq.length,idx=n>=3?[0,(n/2)|0,n-1]:[0];
+      idx.forEach(function(i){if(uniq[i]&&out.indexOf(uniq[i])<0)out.push(uniq[i])});
+      var j=0; while(out.length<3&&j<uniq.length){if(out.indexOf(uniq[j])<0)out.push(uniq[j]);j++}
+    }
+    var f=0; while(out.length<3){var c=FILLER[f%FILLER.length];f++;if(out.indexOf(c.toLowerCase())<0)out.push(c)}
+    return out.slice(0,3).map(cap);
   }
 
   /* ---------- bottle drawing ---------- */
@@ -528,46 +527,11 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     state.rot=saved;
   }
 
-  /* ---------- product photography ---------- */
-  // Prints the custom words over the photographed bottle: the photo is the brand's real
-  // product shot, and a label patch in the bottle's own colour carries the gibberish
-  // exactly where the printed fragrance name sits. Falls back to the drawn SVG bottle
-  // if a photo ever fails to load.
-  function labVars(red){ return red? ["#A6202E","#F4ECE6"] : ["#F1EAE0","#CF2028"]; }
-  function mountShot(host,cfg,ws,gid){
-    host.innerHTML="";
-    var shot=document.createElement("div"); shot.className="shot";
-    var img=document.createElement("img"); img.className="ph"; img.src=cfg.img;
-    img.alt="Bla Bli Blu "+(cfg.n||cfg.w.join(" "))+" parfum bottle";
-    img.loading="lazy"; img.decoding="async";
-    var lab=document.createElement("div"); lab.className="label";
-    var L=cfg.lab;
-    lab.style.left=L[0]+"%"; lab.style.top=L[1]+"%"; lab.style.width=L[2]+"%"; lab.style.height=L[3]+"%";
-    var v=labVars(cfg.oud);
-    lab.style.setProperty("--labbg",v[0]); lab.style.setProperty("--labink",v[1]);
-    for(var i=0;i<3;i++){
-      var s=document.createElement("span"); s.textContent=String(ws[i]||"").toUpperCase(); lab.appendChild(s);
-    }
-    shot.appendChild(img); shot.appendChild(lab); host.appendChild(shot);
-    img.addEventListener("error",function(){
-      var svg=document.createElementNS(SVGNS,"svg");
-      svg.setAttribute("viewBox","0 0 300 400"); svg.setAttribute("aria-hidden","true");
-      shot.innerHTML=""; shot.appendChild(svg);
-      renderBottle({svg:svg,gid:gid,words:ws,relLabel:cfg.rel||"You",fragName:cfg.n||"",notes:"",
-        ml:100,oud:!!cfg.oud,rot:-0.06,sz:1});
-    },{once:true});
-    return shot;
-  }
-  function setWords(ws){
-    var lab=$("shot").querySelector(".label"); if(!lab) return;
-    for(var i=0;i<3;i++) if(lab.children[i]) lab.children[i].textContent=String(ws[i]||"").toUpperCase();
-  }
-
   function words(){ return state.gib || ["BLA","BLI","BLU"]; }
   function drawMain(){
     var f=FRAGS[state.frag];
-    mountShot($("shot"),f,words(),"gMain");
-    applyTilt();
+    renderBottle({svg:$("bottleSvg"),gid:"gMain",words:words(),relLabel:RELS[state.rel].k,
+      fragName:f.n,notes:f.no,ml:SIZES[state.size].ml,oud:f.oud,sz:SIZES[state.size].f});
   }
 
   /* ---------- UI ---------- */
@@ -580,8 +544,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     FRAGS.forEach(function(f,i){
       var b=document.createElement("button");
       b.type="button"; b.className="frag"; b.setAttribute("aria-pressed",i===state.frag);
-      b.innerHTML='<img class="thumb" src="'+f.img+'" alt="" loading="lazy" style="object-position:'+f.op+'">'+
-        '<span class="frag-t">'+
+      b.innerHTML='<span class="swatch" style="background:'+f.c+'"></span><span class="frag-t">'+
         '<span class="frag-n">'+f.n+'</span><span class="frag-no">'+f.no+'</span></span>';
       b.addEventListener("click",function(){state.frag=i;press(fh,i);render()});
       fh.appendChild(b);
@@ -601,7 +564,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
       b.innerHTML=r.k+(r.en?'<i>'+r.en+'</i>':'');
       b.addEventListener("click",function(){
         state.rel=i; press(rh,i);
-        $("line").placeholder=r.ex; $("suggestBtn").textContent=r.ex; render();
+        $("line").placeholder=r.ex; render();
       });
       rh.appendChild(b);
     });
@@ -613,10 +576,13 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     var wg=$("wallGrid");
     WALL.forEach(function(w,i){
       var d=document.createElement("div"); d.className="tile";
-      mountShot(d,w,w.w,"gw"+i);
+      var s=document.createElementNS(SVGNS,"svg");
+      s.setAttribute("viewBox","0 0 300 400"); s.setAttribute("aria-hidden","true");
+      d.appendChild(s);
       var b=document.createElement("b"); b.textContent=w.w.join(" ");
       var sp=document.createElement("span"); sp.textContent='"'+w.line+'" · for '+w.rel;
       d.appendChild(b); d.appendChild(sp); wg.appendChild(d);
+      renderBottle({svg:s,gid:"gw"+i,words:w.w,relLabel:w.rel,fragName:"",notes:"",ml:100,oud:w.oud,rot:-0.06,sz:1});
     });
   }
   function fillTicker(host,items){
@@ -640,21 +606,19 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     }
     $("genBtn").disabled=$("line").value.trim().length<2;
     drawMain();
+    renderBottle({svg:$("heroBottle"),gid:"gHero",words:["BLA","BLI","BLU"],relLabel:"You",
+      fragName:"Love Drunk",notes:"Candied Nuts · Cinnamon · Dates",ml:100,oud:false,rot:-0.07,sz:1});
   }
 
-  /* ---------- tilt ---------- */
+  /* ---------- spin ---------- */
   var vel=0,drag=false,lastX=0,raf=null;
-  function clampTilt(){ if(state.tilt>18)state.tilt=18; if(state.tilt<-18)state.tilt=-18; }
-  function applyTilt(){
-    var s=$("shot");
-    if(s) s.style.transform="perspective(1000px) rotateY("+state.tilt.toFixed(2)+"deg)";
-    $("rotLabel").textContent=Math.round(state.tilt)+"°";
-  }
+  function norm(){while(state.rot>Math.PI)state.rot-=Math.PI*2;while(state.rot<-Math.PI)state.rot+=Math.PI*2}
+  function lab(){$("rotLabel").textContent=Math.round(state.rot*180/Math.PI)+"°"}
   function tick(){
     if(!drag){
-      vel*=0.9;
-      if(Math.abs(vel)<0.02){vel=0;raf=null;return}
-      state.tilt+=vel; clampTilt(); applyTilt();
+      vel*=0.94;
+      if(Math.abs(vel)<0.0004){vel=0;raf=null;return}
+      state.rot+=vel; norm(); drawMain(); lab();
     }
     raf=requestAnimationFrame(tick);
   }
@@ -662,13 +626,13 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   stage.addEventListener("pointerdown",function(e){drag=true;lastX=e.clientX;vel=0;stage.setPointerCapture(e.pointerId)});
   stage.addEventListener("pointermove",function(e){
     if(!drag)return;
-    var d=(e.clientX-lastX)*0.16; lastX=e.clientX;
-    state.tilt+=d; vel=d; clampTilt(); applyTilt();
+    var d=(e.clientX-lastX)*0.011; lastX=e.clientX;
+    state.rot+=d; vel=d; norm(); drawMain(); lab();
   });
   function up(){if(drag){drag=false; if(!raf)raf=requestAnimationFrame(tick)}}
   stage.addEventListener("pointerup",up); stage.addEventListener("pointercancel",up);
   stage.addEventListener("keydown",function(e){
-    if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();state.tilt+=(e.key==="ArrowLeft"?-3:3);clampTilt();applyTilt()}
+    if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();state.rot+=(e.key==="ArrowLeft"?-0.18:0.18);norm();drawMain();lab()}
   });
 
   /* ---------- generation ---------- */
@@ -683,14 +647,14 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
     timer=setInterval(function(){
       var out=[];
       for(var w=0;w<3;w++){var s="",L=3+(w%2);for(var i=0;i<L;i++)s+=POOL[Math.floor(Math.random()*POOL.length)];out.push(s)}
-      $("gib").textContent=out.join(" "); state.gib=out; setWords(out);
+      $("gib").textContent=out.join(" "); state.gib=out; drawMain();
     },70);
   }
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
   function show(w,gloss){
-    state.gib=w.map(function(x){return String(x).slice(0,10)});
+    state.gib=w.map(function(x){return String(x).slice(0,12)});
     $("gib").textContent=state.gib.join(" ");
-    $("gloss").innerHTML=gloss||('Three words that mean <em>'+esc($("line").value.trim())+'</em> — and nothing at all to anyone but '+esc(RELS[state.rel].k)+'.');
+    $("gloss").innerHTML=gloss||('Pulled straight out of what you wrote about '+esc(RELS[state.rel].k)+' — this is what "I love you" sounds like between you two.');
     $("reveal").hidden=false; $("resetBtn").hidden=false; render();
   }
   function noteFor(code){
@@ -701,26 +665,26 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   async function generate(){
     var line=$("line").value.trim(); if(line.length<2)return;
     var r=RELS[state.rel],btn=$("genBtn");
-    btn.disabled=true; btn.textContent="Generating…"; $("err").hidden=true;
+    btn.disabled=true; btn.textContent="Reading…"; $("err").hidden=true;
     $("reveal").hidden=false; $("gloss").textContent="";
     scramble(true);
-    var fb=localGib(line);
+    var fb=localWords(line);
     var done=function(w,gloss,note){
       scramble(false); show(w,gloss);
-      btn.disabled=false; btn.textContent="Turn it into gibberish";
+      btn.disabled=false; btn.textContent="Find their three words";
       if(note){$("err").textContent=note;$("err").hidden=false}
     };
     if(!sampleFn){ setTimeout(function(){done(fb,null,null)},850); return; }
-    var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose own name is built from ONE short '+
-      'consonant sound (1-2 letters) repeated three times as the vowel shifts A, then I, then U — Bla, Bli, Blu. Nothing else '+
-      'is added: no extra letters before the sound, no extra letters after the vowel.\n\n'+
-      'Someone is gifting a bottle to their '+r.k+(r.en?" ("+r.en+")":"")+'.\nTheir line is: "'+line+'"\n\n'+
-      'Pick ONE short consonant sound (1-2 letters, maximum) from the sounds in their line, and build exactly three words: '+
-      '<sound>+A, <sound>+I, <sound>+U. Rules: 2-3 letters per word only; must be trivially easy to read and say out loud on '+
-      'the very first try, like Bla/Bli/Blu itself; NOT a real word in any language; Title Case; the SAME sound in all three, '+
-      'only the vowel changes.\n'+
-      'Also write one warm sentence (max 22 words) on what these words now mean between these two people.\n\n'+
-      'Reply with only JSON: {"words":["Xx","Xx","Xx"],"meaning":"..."}';
+    var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose own name has come to mean "I love you". '+
+      'Every customer writes a few sentences about the person they are gifting a bottle to, and gets back THREE REAL WORDS that '+
+      'become their own private way of saying "I love you" to that person — printed on the bottle in place of "Bla Bli Blu".\n\n'+
+      'Someone is gifting a bottle to their '+r.k+(r.en?" ("+r.en+")":"")+'. Here is what they wrote about them:\n"'+line+'"\n\n'+
+      'Read what they wrote and choose THREE WORDS — real, ordinary words, not invented ones — that capture who this person is to '+
+      'them, the way a close friend would describe them in exactly three words. Rules: each word 3-9 letters; plain words a '+
+      'stranger would recognise, nothing literary or obscure; no two words sharing the same root; Title Case; together they should '+
+      'read like something you could say instead of "I love you", not like generic praise.\n'+
+      'Also write one warm sentence (max 22 words) on why these three words fit, referencing something specific from what they wrote.\n\n'+
+      'Reply with only JSON: {"words":["Word","Word","Word"],"meaning":"..."}';
     try{
       var d=await sampleFn.json(prompt,{modelTier:"quick",cache:false});
       var w=(d&&Array.isArray(d.words))?d.words.filter(Boolean).slice(0,3):null;
@@ -749,8 +713,8 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
   });
 
   build();
-  $("line").placeholder=RELS[0].ex; $("suggestBtn").textContent=RELS[0].ex;
-  render(); applyTilt();
+  $("line").placeholder=RELS[0].ex;
+  render(); lab();
 })();
 </script>
 </body>
