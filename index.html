@@ -378,24 +378,23 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 "use strict";
 /* Label-zone presets: [left%, top%, width%, height%] of the photo — where the printed
 fragrance name sits on the bottle, so the custom words can be printed over it. */
-var LAB_CAN=[49,59,40,9.5]; // studio shot: red canister left, bottle right
-var LAB_SOLO=[31,50,38,9.5]; // studio shot: single bottle, centred
+var LAB_STD=[28,45,44,15]; // official product-shot template: bottle centred, straight-on, label dead centre
 var FRAGS = [
-{n:"Love Drunk", no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C", img:"images/love-drunk.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"Habibi", no:"Coffee · Rose · Leather", p:720, oud:false, c:"#6B3A2E", img:"images/habibi.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"Lights Off", no:"Passionfruit · Caramel · Amber", p:720, oud:false, c:"#C96A2E", img:"images/lights-off.jpg", lab:LAB_SOLO, op:"50% 55%"},
-{n:"Old Money", no:"Chamomile · Cedar · Vanilla", p:720, oud:false, c:"#D6B97B", img:"images/old-money.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"My Wingman", no:"Cardamom · Tobacco · Cedar", p:720, oud:false, c:"#8A5A3B", img:"images/my-wingman.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"By The Beach", no:"Lemon · Bergamot · Apple", p:560, oud:false, c:"#BFCB78", img:"images/by-the-beach.jpg",lab:LAB_SOLO, op:"50% 55%"},
-{n:"Hot AF", no:"Blackcurrant · Lily · Truffle", p:620, oud:false, c:"#7B2D4A", img:"images/hot-af.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"Cookie Crush", no:"Berries · Lilac · Vanilla", p:660, oud:false, c:"#B96F86", img:"images/cookie-crush.jpg",lab:[52.5,61.3,44,10.3], op:"74% 64%"},
-{n:"Peaches", no:"Rose · Orange · Musk", p:660, oud:false, c:"#E39B6B", img:"images/peaches.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"White Jazz", no:"Jasmine · Tuberose", p:720, oud:false, c:"#E3D9BC", img:"images/white-jazz.jpg", lab:LAB_SOLO, op:"50% 55%"},
-{n:"Selfmade", no:"Bourbon Vanilla · Bergamot", p:640, oud:false, c:"#C69355", img:"images/selfmade.jpg", lab:[49,60.5,41,9.5], op:"70% 64%"},
-{n:"Golden Oud", no:"Nutmeg · Saffron · Oud", p:800, oud:true, c:"#9C6B22", img:"images/golden-oud.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"Vetiver Oud", no:"Moroccan Rose · Amber · Oud", p:760, oud:true, c:"#5E3326", img:"images/vetiver-oud.jpg", lab:LAB_CAN, op:"70% 62%"},
-{n:"Oud Honey", no:"Honey · Shamama · Oud", p:760, oud:true, c:"#A9711F", img:"images/oud-honey.jpg", lab:LAB_SOLO, op:"50% 55%"},
-{n:"Ivory Oud", no:"Musk · Patchouli · Oud", p:660, oud:true, c:"#CFC0A8", img:"images/ivory-oud.jpg", lab:LAB_CAN, op:"70% 62%"}
+{n:"Love Drunk", no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C", img:"images/love-drunk.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Habibi", no:"Coffee · Rose · Leather", p:720, oud:false, c:"#6B3A2E", img:"images/habibi.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Lights Off", no:"Passionfruit · Caramel · Amber", p:720, oud:false, c:"#C96A2E", img:"images/lights-off.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Old Money", no:"Chamomile · Cedar · Vanilla", p:720, oud:false, c:"#D6B97B", img:"images/old-money.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"My Wingman", no:"Cardamom · Tobacco · Cedar", p:720, oud:false, c:"#8A5A3B", img:"images/my-wingman.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"By The Beach", no:"Lemon · Bergamot · Apple", p:560, oud:false, c:"#BFCB78", img:"images/by-the-beach.jpg",lab:LAB_STD, op:"50% 50%"},
+{n:"Hot AF", no:"Blackcurrant · Lily · Truffle", p:620, oud:false, c:"#7B2D4A", img:"images/hot-af.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Cookie Crush", no:"Berries · Lilac · Vanilla", p:660, oud:false, c:"#B96F86", img:"images/cookie-crush.jpg",lab:LAB_STD, op:"50% 50%"},
+{n:"Peaches", no:"Rose · Orange · Musk", p:660, oud:false, c:"#E39B6B", img:"images/peaches.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"White Jazz", no:"Jasmine · Tuberose", p:720, oud:false, c:"#E3D9BC", img:"images/white-jazz.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Selfmade", no:"Bourbon Vanilla · Bergamot", p:640, oud:false, c:"#C69355", img:"images/selfmade.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Golden Oud", no:"Nutmeg · Saffron · Oud", p:800, oud:true, c:"#9C6B22", img:"images/golden-oud.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Vetiver Oud", no:"Moroccan Rose · Amber · Oud", p:760, oud:true, c:"#5E3326", img:"images/vetiver-oud.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Oud Honey", no:"Honey · Shamama · Oud", p:760, oud:true, c:"#A9711F", img:"images/oud-honey.jpg", lab:LAB_STD, op:"50% 50%"},
+{n:"Ivory Oud", no:"Musk · Patchouli · Oud", p:660, oud:true, c:"#CFC0A8", img:"images/ivory-oud.jpg", lab:LAB_STD, op:"50% 50%"}
 ];
 var SIZES=[{ml:30,f:.45},{ml:75,f:.85},{ml:100,f:1}];
 var FEE=99;
@@ -417,12 +416,12 @@ var RELS=[
 {k:"Roommate",en:"",ex:"turned a random flat into the closest thing to home"}
 ];
 var WALL=[
-{w:["Annoyed","Room","Back"], line:"the one who's annoyed me since we shared a room, and still has my back", rel:"Bhai", oud:false, img:"images/love-drunk.jpg", lab:LAB_CAN},
-{w:["Asks","Matter","Old"], line:"still asks if I've eaten, no matter how old I get", rel:"Mumma", oud:false, img:"images/peaches.jpg", lab:LAB_CAN},
-{w:["Quiet","Actually","Needed"], line:"quiet about it, but never once missed what I actually needed", rel:"Papa", oud:true, img:"images/vetiver-oud.jpg", lab:LAB_CAN},
-{w:["Spoils","Pretends","Doesn't"], line:"spoils me rotten and pretends every time that she doesn't", rel:"Nani", oud:false, img:"images/white-jazz.jpg", lab:LAB_SOLO},
-{w:["Knows","Before","Sentence"], line:"knows exactly what I mean before I finish the sentence", rel:"Best friend", oud:true, img:"images/golden-oud.jpg", lab:LAB_CAN},
-{w:["Turned","Closest","Home"], line:"turned a random flat into the closest thing to home", rel:"Roommate", oud:false, img:"images/by-the-beach.jpg", lab:LAB_SOLO}
+{w:["Annoyed","Room","Back"], line:"the one who's annoyed me since we shared a room, and still has my back", rel:"Bhai", oud:false, img:"images/love-drunk.jpg", lab:LAB_STD},
+{w:["Asks","Matter","Old"], line:"still asks if I've eaten, no matter how old I get", rel:"Mumma", oud:false, img:"images/peaches.jpg", lab:LAB_STD},
+{w:["Quiet","Actually","Needed"], line:"quiet about it, but never once missed what I actually needed", rel:"Papa", oud:true, img:"images/vetiver-oud.jpg", lab:LAB_STD},
+{w:["Spoils","Pretends","Doesn't"], line:"spoils me rotten and pretends every time that she doesn't", rel:"Nani", oud:false, img:"images/white-jazz.jpg", lab:LAB_STD},
+{w:["Knows","Before","Sentence"], line:"knows exactly what I mean before I finish the sentence", rel:"Best friend", oud:true, img:"images/golden-oud.jpg", lab:LAB_STD},
+{w:["Turned","Closest","Home"], line:"turned a random flat into the closest thing to home", rel:"Roommate", oud:false, img:"images/by-the-beach.jpg", lab:LAB_STD}
 ];
 
 var state={frag:0,size:2,rel:0,gib:null,rot:-0.08,tilt:0};
@@ -561,7 +560,7 @@ state.rot=saved;
 // product shot, and a label patch in the bottle's own colour carries the words
 // exactly where the printed fragrance name sits. Falls back to the drawn SVG bottle
 // if a photo ever fails to load.
-function labVars(red){ return red? ["#A6202E","#F4ECE6"] : ["#F1EAE0","#CF2028"]; }
+function labVars(red){ return red? ["#960316","#F4ECE6"] : ["#EFECE5","#CF2028"]; }
 function mountShot(host,cfg,ws,gid){
 host.innerHTML="";
 var shot=document.createElement("div"); shot.className="shot";
