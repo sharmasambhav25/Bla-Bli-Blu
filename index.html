@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bla Bli Blu Words Studio</title>
-<meta name="description" content="Tell us about the person you're gifting this to. We'll turn it into the three words that become their version of I love you.">
+<meta name="description" content="Type the three words that are your own version of I love you — or randomize them — and we'll print them on the bottle.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
@@ -134,6 +134,7 @@ width:24px; height:24px; display:grid; place-items:center; flex:none;
 }
 .step-head h3{font-size:19px}
 .step-pick{margin-left:auto; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.05em; font-size:13.5px; color:var(--red-hot)}
+.step-sub{font-size:14px; color:var(--ink-3); margin:-8px 0 15px}
 
 .frags{display:grid; grid-template-columns:repeat(auto-fill,minmax(196px,1fr)); gap:8px}
 .frag{
@@ -173,6 +174,14 @@ font-family:"Barlow",sans-serif; font-size:19px; line-height:1.4;
 }
 textarea::placeholder{color:var(--ink-3); font-style:italic}
 textarea:focus{outline:2.5px solid var(--red-hot); outline-offset:0; border-color:transparent}
+.words3{display:flex; gap:10px; flex-wrap:wrap}
+.words3 input{
+flex:1 1 140px; min-width:0; background:var(--surface); color:var(--ink);
+border:1px solid var(--line); padding:13px 14px; text-align:center;
+font-family:"Anton",sans-serif; font-size:19px; text-transform:uppercase; letter-spacing:.01em;
+}
+.words3 input::placeholder{color:var(--ink-3); font-style:italic; font-family:"Barlow",sans-serif; text-transform:none; font-size:15px}
+.words3 input:focus{outline:2.5px solid var(--red-hot); outline-offset:0; border-color:transparent}
 .linefoot{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap; font-size:13px; color:var(--ink-3)}
 .linefoot button{background:none; border:none; padding:0; font:inherit; color:var(--red-hot); cursor:pointer; text-decoration:underline; text-underline-offset:2px}
 .count{font-variant-numeric:tabular-nums}
@@ -253,7 +262,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div>
 <div class="kicker">The Words Studio</div>
 <h1>Everyone has their own way of <em>saying it</em>.</h1>
-<p>Bla Bli Blu means I love you. So does "the one who still checks if I've eaten." Tell us about the person you're gifting this to — we'll turn what you write into the three words that are your version of it, printed where our name usually goes.</p>
+<p>Bla Bli Blu means I love you. Yours might be three completely different words. Type them — or hit randomize if you don't want to think — and we'll print your version where our name usually goes.</p>
 <a class="btn" href="#studio">Make your bottle</a>
 </div>
 <div class="hero-art"><img src="images/hero-set.jpg" width="800" height="800" alt="The Bla Bli Blu parfum set — six labelled travel sprays arranged around the red BLA BLI BLU box"></div>
@@ -274,7 +283,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div class="s4"><div class="n">01</div><h3>Pick the scent</h3><p>Fifteen fragrances across the parfum and oud ranges.</p></div>
 <div class="s4"><div class="n">02</div><h3>Pick the size</h3><p>30ml, 75ml or the full 100ml bottle.</p></div>
 <div class="s4"><div class="n">03</div><h3>Pick your person</h3><p>Bhai, Mumma, Nani, your best friend — anyone who'd get it.</p></div>
-<div class="s4"><div class="n">04</div><h3>Tell us about them</h3><p>We turn it into their three words, and print them on the glass.</p></div>
+<div class="s4"><div class="n">04</div><h3>Type your three words</h3><p>Yours, not ours — or hit randomize and we'll pick for you.</p></div>
 </div>
 </div>
 </section>
@@ -283,7 +292,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div class="wrap">
 <div class="sec-head">
 <h2>Build it</h2>
-<p>Tell us about them. Three words come out — pulled from what you actually wrote, not a phrase everyone else uses too.</p>
+<p>Type the three words that are your "I love you" — or randomize if you don't want to think about it. Nobody else's three are the same as yours.</p>
 </div>
 <div class="studio-grid">
 <div class="panel">
@@ -300,28 +309,31 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div class="rels" id="rels"></div>
 </div>
 <div class="step">
-<div class="step-head"><span class="step-n">4</span><h3>Tell us about them</h3></div>
-<label for="line" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">About them</label>
-<textarea id="line" maxlength="220" placeholder="the one who's annoyed me since we shared a room, and still has my back"></textarea>
+<div class="step-head"><span class="step-n">4</span><h3>Type your three words</h3></div>
+<p class="step-sub">Everyone says "I love you" differently. Type the three words that are yours — or randomize if you don't want to think about it.</p>
+<div class="words3" id="words3">
+<label for="w0" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">First word</label>
+<input type="text" id="w0" maxlength="14" autocomplete="off" spellcheck="false">
+<label for="w1" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Second word</label>
+<input type="text" id="w1" maxlength="14" autocomplete="off" spellcheck="false">
+<label for="w2" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Third word</label>
+<input type="text" id="w2" maxlength="14" autocomplete="off" spellcheck="false">
+</div>
 <div class="linefoot">
-<span>Stuck? <button type="button" id="suggestBtn">Give me an example</button></span>
-<span class="count"><span id="count">0</span>/220</span>
+<span>Can't decide? <button type="button" id="randomBtn">Randomize</button></span>
 </div>
 <div class="genrow">
-<button class="btn" id="genBtn" disabled>Find their three words</button>
-<button class="btn-line" id="resetBtn" hidden>Start over</button>
+<button class="btn-line" id="resetBtn">Clear</button>
 </div>
-<p class="err" id="err" hidden></p>
 </div>
 
-<div class="reveal" id="reveal" hidden>
+<div class="reveal" id="reveal">
 <div class="lab">Your Bla Bli Blu</div>
 <p class="gib" id="gib">— — —</p>
-<p class="gloss" id="gloss"></p>
+<p class="gloss" id="gloss">This is what "I love you" sounds like, just between the two of you.</p>
 <div class="rfoot">
 <div class="price"><span id="price">₹819</span><small id="priceNote">100ML · INCL. ₹99 PERSONALISATION</small></div>
-<button class="btn-line" id="againBtn">Try another</button>
-<button class="btn" id="cartBtn">Make my bottle</button>
+<button class="btn" id="cartBtn" disabled>Make my bottle</button>
 </div>
 </div>
 </div>
@@ -347,7 +359,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div class="wrap">
 <div class="sec-head">
 <h2>Everyone's got one</h2>
-<p>Real messages, turned into the three words that say it for them. Nobody else's version reads the same.</p>
+<p>Real words, chosen on purpose. Nobody else's three are the same as yours.</p>
 </div>
 <div class="wall" id="wallGrid"></div>
 </div>
@@ -417,37 +429,40 @@ var state={frag:0,size:2,rel:0,gib:null,rot:-0.08,tilt:0};
 var $=function(i){return document.getElementById(i)};
 var SVGNS="http://www.w3.org/2000/svg";
 
-/* ---------- three-words engine ---------- */
-// No more invented sounds: the words on the bottle are real, and they're pulled straight
-// out of what the giver actually wrote about the person. The live model (when it's running)
-// reads the whole message and picks the three words that best capture them. Offline — like on
-// GitHub Pages, with no model to call — this engine falls back to honest extraction: it strips
-// filler words out of the message and keeps three real, distinct words from what was written,
-// spread across the message rather than clumped in one place.
+/* ---------- your three words ---------- */
+// No algorithm reading anything: the giver types the exact three words that are their own
+// way of saying "I love you" to this person. Nothing is pulled or guessed — if all three
+// boxes are filled, those are the words. For anyone who doesn't want to think one up, a
+// curated word bank (grouped by who the bottle is for) can fill the three boxes at random.
 function cap(w){return w.charAt(0).toUpperCase()+w.slice(1)}
-var STOP={the:1,a:1,an:1,and:1,or:1,but:1,of:1,to:1,in:1,on:1,at:1,for:1,with:1,is:1,are:1,was:1,were:1,be:1,been:1,being:1,
-i:1,you:1,he:1,she:1,it:1,we:1,they:1,my:1,your:1,his:1,her:1,its:1,our:1,their:1,me:1,him:1,them:1,us:1,
-this:1,that:1,these:1,those:1,so:1,just:1,also:1,very:1,really:1,still:1,even:1,never:1,always:1,not:1,no:1,
-"do":1,"does":1,"did":1,"doing":1,"have":1,"has":1,"had":1,"having":1,"will":1,"would":1,"can":1,"could":1,"should":1,"shall":1,"may":1,"might":1,"must":1,
-"if":1,"then":1,"than":1,"as":1,"when":1,"who":1,"whom":1,"which":1,"what":1,"how":1,"why":1,"because":1,"since":1,"while":1,"about":1,"into":1,"onto":1,"from":1,"by":1,
-"up":1,"down":1,"out":1,"over":1,"under":1,"again":1,"more":1,"most":1,"some":1,"any":1,"all":1,"one":1,"two":1,"get":1,"got":1,"gets":1,"make":1,"makes":1,"made":1,
-"am":1,"too":1,"every":1,"everyone":1,"someone":1,"something":1,"anything":1,"once":1,
-"who's":1,"it's":1,"i've":1,"don't":1,"didn't":1,"wasn't":1,"weren't":1,"haven't":1,"hasn't":1,"wouldn't":1,"couldn't":1,"shouldn't":1,"that's":1,"there's":1,"what's":1,"let's":1,"i'm":1,"i'll":1,"i'd":1};
-var FILLER=["Home","Steady","Ours","Close","Forever","Warmth"];
-function tokenize(line){
-return line.toLowerCase().replace(/[^a-z' ]/g," ").split(/\s+/).filter(function(w){return w.length>=3&&!STOP[w]});
+var WORDBANK={
+"Bhai":["Annoying","Loyal","Backup","Steady","Shield","Constant","Rival","Protector","Sorted"],
+"Behen":["Loud","Dramatic","Fierce","Honest","Backup","Chaos","Blunt","Loyal","Sorted"],
+"Mumma":["Warmth","Steady","Worried","Devoted","Constant","Feeder","Anchor","Patient","Home"],
+"Papa":["Quiet","Steady","Constant","Provider","Watchful","Gentle","Firm","Anchor","Silent"],
+"Nani":["Soft","Spoils","Gentle","Warmth","Sweet","Patient","Doting","Endless","Blessing"],
+"Dadi":["Stories","Patient","Warmth","Endless","Wisdom","Gentle","Repeats","Comfort","Steady"],
+"Nana":["Stubborn","Wise","Patient","Steady","Gruff","Loyal","Firm","Grounded","Teacher"],
+"Dada":["Nickname","Warmth","Gruff","Patient","Steady","Playful","Wise","Constant","Chuckle"],
+"Masi":["Second","Motherly","Warmth","Honest","Spoils","Gentle","Loyal","Comfort","Fun"],
+"Bua":["Loud","Funny","Chaos","Warmth","Center","Loyal","Dramatic","Sorted","Spirited"],
+"Chachu":["Fun","Loyal","Sides","Playful","Cool","Steady","Backup","Generous","Mischief"],
+"Mama":["Listens","Patient","Calm","Steady","Honest","Grounded","Wise","Present","Kind"],
+"Best friend":["Knows","Constant","Honest","Loyal","Unfiltered","Steady","Chosen","Forever","Blunt"],
+"Partner":["Home","Steady","Chosen","Constant","Safe","Real","Forever","Ours","Anchor"],
+"Roommate":["Home","Chaos","Constant","Comfort","Familiar","Steady","Shared","Warmth","Sorted"]
+};
+function randomWords(relKey){
+var pool=(WORDBANK[relKey]||["Warmth","Steady","Home"]).slice(),out=[];
+while(out.length<3&&pool.length){
+var i=Math.floor(Math.random()*pool.length);
+out.push(pool.splice(i,1)[0]);
 }
-function localWords(line){
-var toks=tokenize(line),seen={},uniq=[];
-toks.forEach(function(w){var stem=w.slice(0,5);if(!seen[stem]){seen[stem]=true;uniq.push(w)}});
-var out=[];
-if(uniq.length){
-var n=uniq.length,idx=n>=3?[0,(n/2)|0,n-1]:[0];
-idx.forEach(function(i){if(uniq[i]&&out.indexOf(uniq[i])<0)out.push(uniq[i])});
-var j=0; while(out.length<3&&j<uniq.length){if(out.indexOf(uniq[j])<0)out.push(uniq[j]);j++}
+return out;
 }
-var f=0; while(out.length<3){var c=FILLER[f%FILLER.length];f++;if(out.indexOf(c.toLowerCase())<0)out.push(c)}
-return out.slice(0,3).map(cap);
+function setPlaceholders(relKey){
+var ex=(WORDBANK[relKey]||["Warmth","Steady","Home"]).slice(0,3);
+$("w0").placeholder=ex[0]||"Word"; $("w1").placeholder=ex[1]||"Word"; $("w2").placeholder=ex[2]||"Word";
 }
 
 /* ---------- bottle drawing ---------- */
@@ -614,7 +629,7 @@ b.type="button"; b.className="rel"; b.setAttribute("aria-pressed",i===state.rel)
 b.innerHTML=r.k+(r.en?'<i>'+r.en+'</i>':'');
 b.addEventListener("click",function(){
 state.rel=i; press(rh,i);
-$("line").placeholder=r.ex; render();
+setPlaceholders(r.k); render();
 });
 rh.appendChild(b);
 });
@@ -639,6 +654,9 @@ var span2=span.cloneNode(true);
 host.appendChild(span); host.appendChild(span2);
 }
 
+function wordsFilled(){
+return !!(state.gib && state.gib.length===3 && state.gib.every(function(w){return w&&w.length>0}));
+}
 function render(){
 var f=FRAGS[state.frag],s=SIZES[state.size],r=RELS[state.rel];
 $("pickFrag").textContent=f.n; $("pickRel").textContent=r.k;
@@ -651,7 +669,8 @@ var sp=document.querySelectorAll("[data-si]");
 for(var i=0;i<sp.length;i++){
 sp[i].textContent=fmt(Math.round(f.p*SIZES[+sp[i].getAttribute("data-si")].f/10)*10);
 }
-$("genBtn").disabled=$("line").value.trim().length<2;
+$("gib").textContent=wordsFilled()? state.gib.join(" ").toUpperCase() : "— — —";
+$("cartBtn").disabled=!wordsFilled();
 drawMain();
 }
 
@@ -684,85 +703,33 @@ stage.addEventListener("keydown",function(e){
 if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();state.tilt+=(e.key==="ArrowLeft"?-3:3);clampTilt();applyTilt()}
 });
 
-/* ---------- generation ---------- */
-var sampleFn=null,timer=null;
-if(window.claude&&typeof window.claude.use==="function"){
-window.claude.use("sample").then(function(s){sampleFn=s}).catch(function(){sampleFn=null});
+/* ---------- word input ---------- */
+function currentInputWords(){
+return [$("w0").value,$("w1").value,$("w2").value].map(function(w){return w.trim()});
 }
-var POOL="BLAIUMKHPRTSCHNDGVZ";
-function scramble(on){
-if(timer){clearInterval(timer);timer=null}
-if(!on)return;
-timer=setInterval(function(){
-var out=[];
-for(var w=0;w<3;w++){var s="",L=3+(w%2);for(var i=0;i<L;i++)s+=POOL[Math.floor(Math.random()*POOL.length)];out.push(s)}
-$("gib").textContent=out.join(" "); state.gib=out; setWords(out);
-},70);
+function syncWords(){
+var w=currentInputWords();
+state.gib=w.every(function(x){return x.length>0})? w.map(function(x){return cap(x.slice(0,14))}) : null;
+render();
 }
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-function show(w,gloss){
-state.gib=w.map(function(x){return String(x).slice(0,12)});
-$("gib").textContent=state.gib.join(" ");
-$("gloss").innerHTML=gloss||('Pulled straight out of what you wrote about '+esc(RELS[state.rel].k)+' — this is what "I love you" sounds like between you two.');
-$("reveal").hidden=false; $("resetBtn").hidden=false; render();
-}
-function noteFor(code){
-if(!code||code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled"||code==="capability_removed")return "";
-if(code==="rate_limited")return "Busy right now — this one came from the studio's own engine.";
-return "Couldn't reach the model — this one came from the studio's own engine.";
-}
-async function generate(){
-var line=$("line").value.trim(); if(line.length<2)return;
-var r=RELS[state.rel],btn=$("genBtn");
-btn.disabled=true; btn.textContent="Reading…"; $("err").hidden=true;
-$("reveal").hidden=false; $("gloss").textContent="";
-scramble(true);
-var fb=localWords(line);
-var done=function(w,gloss,note){
-scramble(false); show(w,gloss);
-btn.disabled=false; btn.textContent="Find their three words";
-if(note){$("err").textContent=note;$("err").hidden=false}
-};
-if(!sampleFn){ setTimeout(function(){done(fb,null,null)},850); return; }
-var prompt='You are the naming engine for Bla Bli Blu, an Indian fragrance brand whose own name has come to mean "I love you". '+
-'Every customer writes a few sentences about the person they are gifting a bottle to, and gets back THREE REAL WORDS that '+
-'become their own private way of saying "I love you" to that person — printed on the bottle in place of "Bla Bli Blu".\n\n'+
-'Someone is gifting a bottle to their '+r.k+(r.en?" ("+r.en+")":"")+'. Here is what they wrote about them:\n"'+line+'"\n\n'+
-'Read what they wrote and choose THREE WORDS — real, ordinary words, not invented ones — that capture who this person is to '+
-'them, the way a close friend would describe them in exactly three words. Rules: each word 3-9 letters; plain words a '+
-'stranger would recognise, nothing literary or obscure; no two words sharing the same root; Title Case; together they should '+
-'read like something you could say instead of "I love you", not like generic praise.\n'+
-'Also write one warm sentence (max 22 words) on why these three words fit, referencing something specific from what they wrote.\n\n'+
-'Reply with only JSON: {"words":["Word","Word","Word"],"meaning":"..."}';
-try{
-var d=await sampleFn.json(prompt,{modelTier:"quick",cache:false});
-var w=(d&&Array.isArray(d.words))?d.words.filter(Boolean).slice(0,3):null;
-if(!w||w.length!==3) throw {code:"invalid_json"};
-done(w,d.meaning?esc(String(d.meaning)):null,null);
-}catch(e){ done(fb,null,noteFor(e&&e.code)); }
-}
-
-$("line").addEventListener("input",function(){
-$("count").textContent=this.value.length;
-$("genBtn").disabled=this.value.trim().length<2;
+["w0","w1","w2"].forEach(function(id){ $(id).addEventListener("input",syncWords); });
+$("randomBtn").addEventListener("click",function(){
+var w=randomWords(RELS[state.rel].k);
+$("w0").value=w[0]; $("w1").value=w[1]; $("w2").value=w[2];
+syncWords();
 });
-$("suggestBtn").addEventListener("click",function(){
-$("line").value=RELS[state.rel].ex; $("count").textContent=$("line").value.length;
-$("genBtn").disabled=false; $("line").focus();
+$("resetBtn").addEventListener("click",function(){
+$("w0").value=""; $("w1").value=""; $("w2").value="";
+syncWords(); $("w0").focus();
 });
-$("genBtn").addEventListener("click",generate);
-$("againBtn").addEventListener("click",generate);
 $("cartBtn").addEventListener("click",function(){
+if(this.disabled)return;
 var b=this,o=b.textContent; b.textContent="Added — "+words().join(" ");
 setTimeout(function(){b.textContent=o},2200);
 });
-$("resetBtn").addEventListener("click",function(){
-state.gib=null; $("reveal").hidden=true; this.hidden=true;
-$("line").value=""; $("count").textContent="0"; $("genBtn").disabled=true; $("err").hidden=true; render();
-});
 
 build();
-$("line").placeholder=RELS[0].ex;
+setPlaceholders(RELS[0].k);
 render(); applyTilt();
 })();
 </script>
