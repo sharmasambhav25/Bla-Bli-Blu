@@ -214,10 +214,11 @@ border:1px solid var(--line); padding:14px 14px 4px; cursor:grab; touch-action:p
 .shot .label{
 position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center;
 text-align:center; font-family:"Anton",sans-serif; text-transform:uppercase; line-height:1.04;
-letter-spacing:.02em; background:var(--labbg,#F1EAE0); color:var(--labink,#CF2028);
-box-shadow:0 0 9px 5px var(--labbg,#F1EAE0); border-radius:1px;
+letter-spacing:.01em; background:var(--labbg,#F1EAE0); color:var(--labink,#CF2028);
+box-shadow:0 0 0.9cqw 0 var(--labbg,#F1EAE0); border-radius:1px; overflow:hidden;
+font-size:2.35cqw;
 }
-.shot .label span{font-size:2.75cqw; display:block}
+.shot .label span{font-size:inherit; display:block; white-space:nowrap}
 .shot .label span+span{margin-top:.2cqw}
 .stage-foot{display:flex; justify-content:space-between; gap:10px; padding:9px 2px 0; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.09em; font-size:11.5px; color:var(--ink-3)}
 .spec{margin:16px 0 0; border-top:1px solid var(--line)}
@@ -378,7 +379,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 "use strict";
 /* Label-zone presets: [left%, top%, width%, height%] of the photo — where the printed
 fragrance name sits on the bottle, so the custom words can be printed over it. */
-var LAB_STD=[28,45,44,15]; // official product-shot template: bottle centred, straight-on, label dead centre
+var LAB_STD=[32,45,36,15]; // official product-shot template: bottle centred, straight-on, label dead centre (kept inside the measured ~30.5%-69.5% bottle-body width so the blend never bleeds onto the background)
 var FRAGS = [
 {n:"Love Drunk", no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C", img:"images/love-drunk.jpg", lab:LAB_STD, op:"50% 50%"},
 {n:"Habibi", no:"Coffee · Rose · Leather", p:720, oud:false, c:"#6B3A2E", img:"images/habibi.jpg", lab:LAB_STD, op:"50% 50%"},
@@ -561,6 +562,19 @@ state.rot=saved;
 // exactly where the printed fragrance name sits. Falls back to the drawn SVG bottle
 // if a photo ever fails to load.
 function labVars(red){ return red? ["#960316","#F4ECE6"] : ["#EFECE5","#CF2028"]; }
+// Shrinks the label's font-size (in cqw) until every word clears the patch width,
+// so a long typed word never gets clipped by the label's overflow:hidden.
+function fitLabel(lab){
+if(!lab || !lab.clientWidth) return; // not laid out yet (e.g. still detached) - nothing to measure
+var MAX=2.35, MIN=1.05, STEP=0.12, size=MAX;
+lab.style.fontSize=size+"cqw";
+var spans=lab.children, tries=0;
+function overflowing(){
+for(var i=0;i<spans.length;i++){ if(spans[i].scrollWidth>lab.clientWidth+0.5) return true; }
+return false;
+}
+while(overflowing() && size>MIN && tries<20){ size-=STEP; lab.style.fontSize=size+"cqw"; tries++; }
+}
 function mountShot(host,cfg,ws,gid){
 host.innerHTML="";
 var shot=document.createElement("div"); shot.className="shot";
@@ -588,12 +602,14 @@ return shot;
 function setWords(ws){
 var lab=$("shot").querySelector(".label"); if(!lab) return;
 for(var i=0;i<3;i++) if(lab.children[i]) lab.children[i].textContent=String(ws[i]||"").toUpperCase();
+fitLabel(lab);
 }
 
 function words(){ return state.gib || ["BLA","BLI","BLU"]; }
 function drawMain(){
 var f=FRAGS[state.frag];
-mountShot($("shot"),f,words(),"gMain");
+var shot=mountShot($("shot"),f,words(),"gMain");
+fitLabel(shot.querySelector(".label"));
 applyTilt();
 }
 
@@ -640,10 +656,11 @@ fillTicker($("t1"),t1); fillTicker($("t2"),t2);
 var wg=$("wallGrid");
 WALL.forEach(function(w,i){
 var d=document.createElement("div"); d.className="tile";
-mountShot(d,w,w.w,"gw"+i);
+var wshot=mountShot(d,w,w.w,"gw"+i);
 var b=document.createElement("b"); b.textContent=w.w.join(" ");
 var sp=document.createElement("span"); sp.textContent='"'+w.line+'" · for '+w.rel;
 d.appendChild(b); d.appendChild(sp); wg.appendChild(d);
+fitLabel(wshot.querySelector(".label"));
 });
 }
 function fillTicker(host,items){
