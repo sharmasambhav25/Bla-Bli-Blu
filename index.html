@@ -211,15 +211,14 @@ border:1px solid var(--line); padding:14px 14px 4px; cursor:grab; touch-action:p
 .shot{position:relative; aspect-ratio:1/1; container-type:inline-size; will-change:transform}
 .shot img.ph{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
 .shot>svg{position:absolute; inset:0; width:100%; height:100%}
-.shot .label{
+.shot .custom{
 position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center;
 text-align:center; font-family:"Anton",sans-serif; text-transform:uppercase; line-height:1.04;
-letter-spacing:.01em; background:var(--labbg,#F1EAE0); color:var(--labink,#CF2028);
-box-shadow:0 0 0.9cqw 0 var(--labbg,#F1EAE0); border-radius:1px; overflow:hidden;
+letter-spacing:.01em; color:var(--labink,#CF2028); overflow:hidden;
 font-size:2.35cqw;
 }
-.shot .label span{font-size:inherit; display:block; white-space:nowrap}
-.shot .label span+span{margin-top:.2cqw}
+.shot .custom span{font-size:inherit; display:block; white-space:nowrap}
+.shot .custom span+span{margin-top:.2cqw}
 .stage-foot{display:flex; justify-content:space-between; gap:10px; padding:9px 2px 0; font-family:"Barlow Condensed",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.09em; font-size:11.5px; color:var(--ink-3)}
 .spec{margin:16px 0 0; border-top:1px solid var(--line)}
 .spec div{display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px}
@@ -349,7 +348,7 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <div><dt>Notes</dt><dd id="sNotes">Candied Nuts · Cinnamon · Dates</dd></div>
 <div><dt>Size</dt><dd id="sSize">100 ML</dd></div>
 <div><dt>For</dt><dd id="sRel">Bhai</dd></div>
-<div><dt>Reads</dt><dd id="sLabel">BLA BLI BLU</dd></div>
+<div><dt>Reads</dt><dd id="sLabel">— — —</dd></div>
 </dl>
 </div>
 </div>
@@ -377,9 +376,11 @@ footer p{margin:0; font-size:13.5px; opacity:.9; max-width:58ch}
 <script>
 (function(){
 "use strict";
-/* Label-zone presets: [left%, top%, width%, height%] of the photo — where the printed
-fragrance name sits on the bottle, so the custom words can be printed over it. */
-var LAB_STD=[32,45,36,15]; // official product-shot template: bottle centred, straight-on, label dead centre (kept inside the measured ~30.5%-69.5% bottle-body width so the blend never bleeds onto the background)
+/* Custom-word zone presets: [left%, top%, width%, height%] of the photo — a blank strip of
+the bottle body where NOTHING is printed (measured: the fragrance name ends ~57%, the notes
+line starts ~71.5%, consistent across every product shot), so the three custom words print
+into empty space instead of covering the brand name or the fragrance name. */
+var LAB_STD=[32,58.5,36,11]; // official product-shot template: bottle centred, straight-on, blank gap between the fragrance name and the notes line
 var FRAGS = [
 {n:"Love Drunk", no:"Candied Nuts · Cinnamon · Dates", p:720, oud:false, c:"#C77A3C", img:"images/love-drunk.jpg", lab:LAB_STD, op:"50% 50%"},
 {n:"Habibi", no:"Coffee · Rose · Leather", p:720, oud:false, c:"#6B3A2E", img:"images/habibi.jpg", lab:LAB_STD, op:"50% 50%"},
@@ -557,23 +558,24 @@ state.rot=saved;
 }
 
 /* ---------- product photography ---------- */
-// Prints the three words over the photographed bottle: the photo is the brand's real
-// product shot, and a label patch in the bottle's own colour carries the words
-// exactly where the printed fragrance name sits. Falls back to the drawn SVG bottle
-// if a photo ever fails to load.
-function labVars(red){ return red? ["#960316","#F4ECE6"] : ["#EFECE5","#CF2028"]; }
-// Shrinks the label's font-size (in cqw) until every word clears the patch width,
-// so a long typed word never gets clipped by the label's overflow:hidden.
-function fitLabel(lab){
-if(!lab || !lab.clientWidth) return; // not laid out yet (e.g. still detached) - nothing to measure
+// Prints the three custom words into the blank gap on the photographed bottle: the photo
+// is the brand's real, untouched product shot (brand name, fragrance name and notes are
+// never covered) — the words print in ink only, no background patch, into the empty strip
+// between the fragrance name and the notes line. Falls back to the drawn SVG bottle if a
+// photo ever fails to load.
+function customInk(red){ return red? "#F4ECE6" : "#CF2028"; }
+// Shrinks the custom text's font-size (in cqw) until every word clears the zone width,
+// so a long typed word never gets clipped by the zone's overflow:hidden.
+function fitLabel(zone){
+if(!zone || !zone.clientWidth) return; // not laid out yet (e.g. still detached) - nothing to measure
 var MAX=2.35, MIN=1.05, STEP=0.12, size=MAX;
-lab.style.fontSize=size+"cqw";
-var spans=lab.children, tries=0;
+zone.style.fontSize=size+"cqw";
+var spans=zone.children, tries=0;
 function overflowing(){
-for(var i=0;i<spans.length;i++){ if(spans[i].scrollWidth>lab.clientWidth+0.5) return true; }
+for(var i=0;i<spans.length;i++){ if(spans[i].scrollWidth>zone.clientWidth+0.5) return true; }
 return false;
 }
-while(overflowing() && size>MIN && tries<20){ size-=STEP; lab.style.fontSize=size+"cqw"; tries++; }
+while(overflowing() && size>MIN && tries<20){ size-=STEP; zone.style.fontSize=size+"cqw"; tries++; }
 }
 function mountShot(host,cfg,ws,gid){
 host.innerHTML="";
@@ -581,15 +583,14 @@ var shot=document.createElement("div"); shot.className="shot";
 var img=document.createElement("img"); img.className="ph"; img.src=cfg.img;
 img.alt="Bla Bli Blu "+(cfg.n||cfg.w.join(" "))+" parfum bottle";
 img.loading="lazy"; img.decoding="async";
-var lab=document.createElement("div"); lab.className="label";
+var zone=document.createElement("div"); zone.className="custom";
 var L=cfg.lab;
-lab.style.left=L[0]+"%"; lab.style.top=L[1]+"%"; lab.style.width=L[2]+"%"; lab.style.height=L[3]+"%";
-var v=labVars(cfg.oud);
-lab.style.setProperty("--labbg",v[0]); lab.style.setProperty("--labink",v[1]);
+zone.style.left=L[0]+"%"; zone.style.top=L[1]+"%"; zone.style.width=L[2]+"%"; zone.style.height=L[3]+"%";
+zone.style.setProperty("--labink",customInk(cfg.oud));
 for(var i=0;i<3;i++){
-var s=document.createElement("span"); s.textContent=String(ws[i]||"").toUpperCase(); lab.appendChild(s);
+var s=document.createElement("span"); s.textContent=String(ws[i]||"").toUpperCase(); zone.appendChild(s);
 }
-shot.appendChild(img); shot.appendChild(lab); host.appendChild(shot);
+shot.appendChild(img); shot.appendChild(zone); host.appendChild(shot);
 img.addEventListener("error",function(){
 var svg=document.createElementNS(SVGNS,"svg");
 svg.setAttribute("viewBox","0 0 300 400"); svg.setAttribute("aria-hidden","true");
@@ -599,17 +600,13 @@ ml:100,oud:!!cfg.oud,rot:-0.06,sz:1});
 },{once:true});
 return shot;
 }
-function setWords(ws){
-var lab=$("shot").querySelector(".label"); if(!lab) return;
-for(var i=0;i<3;i++) if(lab.children[i]) lab.children[i].textContent=String(ws[i]||"").toUpperCase();
-fitLabel(lab);
-}
 
 function words(){ return state.gib || ["BLA","BLI","BLU"]; }
 function drawMain(){
 var f=FRAGS[state.frag];
-var shot=mountShot($("shot"),f,words(),"gMain");
-fitLabel(shot.querySelector(".label"));
+var ws=wordsFilled()? state.gib : ["","",""]; // leave the bottle exactly as photographed until all three words are typed
+var shot=mountShot($("shot"),f,ws,"gMain");
+fitLabel(shot.querySelector(".custom"));
 applyTilt();
 }
 
@@ -660,7 +657,7 @@ var wshot=mountShot(d,w,w.w,"gw"+i);
 var b=document.createElement("b"); b.textContent=w.w.join(" ");
 var sp=document.createElement("span"); sp.textContent='"'+w.line+'" · for '+w.rel;
 d.appendChild(b); d.appendChild(sp); wg.appendChild(d);
-fitLabel(wshot.querySelector(".label"));
+fitLabel(wshot.querySelector(".custom"));
 });
 }
 function fillTicker(host,items){
@@ -678,7 +675,7 @@ var f=FRAGS[state.frag],s=SIZES[state.size],r=RELS[state.rel];
 $("pickFrag").textContent=f.n; $("pickRel").textContent=r.k;
 $("sFrag").textContent=f.n; $("sNotes").textContent=f.no;
 $("sSize").textContent=s.ml+" ML"; $("sRel").textContent=r.k;
-$("sLabel").textContent=words().join(" ").toUpperCase();
+$("sLabel").textContent=wordsFilled()? state.gib.join(" ").toUpperCase() : "— — —";
 $("price").textContent=fmt(price());
 $("priceNote").textContent=s.ml+"ML · INCL. ₹99 PERSONALISATION";
 var sp=document.querySelectorAll("[data-si]");
